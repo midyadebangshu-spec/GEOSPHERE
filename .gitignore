@@ -20,6 +20,7 @@ osrm-data/
 # Logs
 logs/
 *.log
+wget-log*
 
 # OS-generated files
 .DS_Store
@@ -41,3 +42,7 @@ pm2.log
 .vscode/
 *.swp
 *.swo
+
+# Cloudflare tunnel local config (keep template tracked)
+cloudflared/*.yml
+!cloudflared/config.example.yml

@@ -8,10 +8,11 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const { validateCoords } = require('../middleware/validate');
 
 const OSRM_URL = process.env.OSRM_URL || 'http://localhost:5000';
+const OSRM_FALLBACK_URLS = ['http://localhost:5001', 'http://localhost:5000'];
 
 router.get('/', async (req, res, next) => {
     try {
@@ -27,9 +28,25 @@ router.get('/', async (req, res, next) => {
         // OSRM expects lon,lat order
         const coords = `${startLon},${startLat};${endLon},${endLat}`;
 
-        const url = `${OSRM_URL}/route/v1/${profile}/${coords}?overview=full&geometries=geojson&alternatives=${alternatives}&steps=${steps}`;
+        const baseCandidates = [OSRM_URL, ...OSRM_FALLBACK_URLS.filter(base => base !== OSRM_URL)];
+        let response = null;
+        let lastError = null;
 
-        const response = await fetch(url);
+        for (const base of baseCandidates) {
+            const url = `${base}/route/v1/${profile}/${coords}?overview=full&geometries=geojson&alternatives=${alternatives}&steps=${steps}`;
+            try {
+                response = await fetch(url);
+                if (response.ok) {
+                    break;
+                }
+            } catch (fetchErr) {
+                lastError = fetchErr;
+            }
+        }
+
+        if (!response) {
+            throw lastError || new Error('OSRM request failed');
+        }
 
         if (!response.ok) {
             return res.status(response.status).json({ error: 'OSRM routing request failed.' });
