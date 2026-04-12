@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GeoSphere WB+ — An advanced regional map platform for West Bengal with routing, search, analytics, and real-time spatial data.">
+    <meta name="keywords" content="West Bengal, Map, GIS, OpenStreetMap, Routing, Geocoding, Spatial Analytics">
+    <meta property="og:title" content="GeoSphere WB+">
+    <meta property="og:description" content="Advanced regional map platform for West Bengal powered by OpenStreetMap.">
+    <meta property="og:type" content="website">
+    <title>GeoSphere WB+ — Advanced Map Platform</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+
+    <!-- Leaflet Routing Machine CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css">
+
+    <!-- App CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ─── Loading Screen ────────────────────────────────────────────── -->
+    <div id="loading-screen">
+        <div class="loader-content">
+            <div class="loader-globe">
+                <div class="globe-ring"></div>
+                <div class="globe-ring ring-2"></div>
+                <div class="globe-core"></div>
+            </div>
+            <h1 class="loader-title">GeoSphere <span>WB+</span></h1>
+            <p class="loader-subtitle">Initializing map platform...</p>
+            <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+        </div>
+    </div>
+
+    <!-- ─── Top Bar ───────────────────────────────────────────────────── -->
+    <header id="top-bar">
+        <div class="top-bar-left">
+            <button id="sidebar-toggle" class="icon-btn" title="Toggle Sidebar">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+            <div class="logo">
+                <span class="logo-icon">🌐</span>
+                <span class="logo-text">GeoSphere <strong>WB+</strong></span>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div id="search-container">
+            <div class="search-box">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input type="text" id="search-input" placeholder="Search places in West Bengal..." autocomplete="off">
+                <button id="search-clear" class="icon-btn hidden" title="Clear search">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div id="search-results" class="hidden"></div>
+        </div>
+
+        <div class="top-bar-right">
+            <button id="btn-my-location" class="icon-btn" title="My Location">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- ─── Sidebar ───────────────────────────────────────────────────── -->
+    <aside id="sidebar">
+        <nav class="sidebar-nav">
+            <button class="sidebar-tab active" data-panel="layers-panel" id="tab-layers">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
+                </svg>
+                <span>Layers</span>
+            </button>
+            <button class="sidebar-tab" data-panel="route-panel" id="tab-route">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 17l4-4 4 4 4-4 4 4"/><circle cx="7" cy="7" r="3"/>
+                </svg>
+                <span>Directions</span>
+            </button>
+            <button class="sidebar-tab" data-panel="nearby-panel" id="tab-nearby">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+                </svg>
+                <span>Nearby</span>
+            </button>
+            <button class="sidebar-tab" data-panel="analytics-panel" id="tab-analytics">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+                </svg>
+                <span>Analytics</span>
+            </button>
+            <button class="sidebar-tab" data-panel="geofence-panel" id="tab-geofence">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke-dasharray="4,3"/>
+                </svg>
+                <span>Geofence</span>
+            </button>
+        </nav>
+
+        <!-- Layers Panel -->
+        <div class="sidebar-panel active" id="layers-panel">
+            <h2>Map Layers</h2>
+            <div class="layer-group">
+                <h3>Base Map</h3>
+                <label class="layer-toggle">
+                    <input type="radio" name="basemap" value="dark" checked>
+                    <span class="toggle-label">🌙 Dark Mode</span>
+                </label>
+                <label class="layer-toggle">
+                    <input type="radio" name="basemap" value="osm">
+                    <span class="toggle-label">🗺️ OpenStreetMap</span>
+                </label>
+                <label class="layer-toggle">
+                    <input type="radio" name="basemap" value="satellite">
+                    <span class="toggle-label">🛰️ Satellite</span>
+                </label>
+                <label class="layer-toggle">
+                    <input type="radio" name="basemap" value="terrain">
+                    <span class="toggle-label">⛰️ Terrain</span>
+                </label>
+            </div>
+            <div class="layer-group">
+                <h3>GeoServer WMS Overlays</h3>
+                <label class="layer-toggle">
+                    <input type="checkbox" id="layer-roads" value="planet_osm_roads">
+                    <span class="toggle-label">🛣️ Roads (WMS)</span>
+                </label>
+                <label class="layer-toggle">
+                    <input type="checkbox" id="layer-points" value="planet_osm_point">
+                    <span class="toggle-label">📍 Points of Interest (WMS)</span>
+                </label>
+                <label class="layer-toggle">
+                    <input type="checkbox" id="layer-polygons" value="planet_osm_polygon">
+                    <span class="toggle-label">🏗️ Buildings & Areas (WMS)</span>
+                </label>
+                <label class="layer-toggle">
+                    <input type="checkbox" id="layer-lines" value="planet_osm_line">
+                    <span class="toggle-label">〰️ Lines (WMS)</span>
+                </label>
+            </div>
+            <div class="layer-group">
+                <h3>Visualization</h3>
+                <label class="layer-toggle">
+                    <input type="checkbox" id="layer-heatmap">
+                    <span class="toggle-label">🔥 Heatmap</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Directions Panel -->
+        <div class="sidebar-panel" id="route-panel">
+            <h2>Directions</h2>
+            <div class="route-inputs">
+                <div class="route-input-group">
+                    <span class="route-dot start"></span>
+                    <input type="text" id="route-start" placeholder="Start point (click map or search)">
+                </div>
+                <button id="route-swap" class="icon-btn" title="Swap start/end">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="7 16 3 12 7 8"/><polyline points="17 8 21 12 17 16"/><line x1="3" y1="12" x2="21" y2="12"/>
+                    </svg>
+                </button>
+                <div class="route-input-group">
+                    <span class="route-dot end"></span>
+                    <input type="text" id="route-end" placeholder="End point (click map or search)">
+                </div>
+            </div>
+            <div class="route-profiles">
+                <button class="profile-btn active" data-profile="driving" title="Driving">🚗</button>
+                <button class="profile-btn" data-profile="cycling" title="Cycling">🚴</button>
+                <button class="profile-btn" data-profile="walking" title="Walking">🚶</button>
+            </div>
+            <button id="btn-get-route" class="action-btn">Get Directions</button>
+            <button id="btn-clear-route" class="action-btn secondary hidden">Clear Route</button>
+            <div id="route-info" class="hidden"></div>
+            <div id="route-steps" class="hidden"></div>
+        </div>
+
+        <!-- Nearby Panel -->
+        <div class="sidebar-panel" id="nearby-panel">
+            <h2>Nearby Places</h2>
+            <div class="nearby-categories">
+                <button class="category-chip active" data-type="">All</button>
+                <button class="category-chip" data-type="hospital">🏥 Hospital</button>
+                <button class="category-chip" data-type="school">🏫 School</button>
+                <button class="category-chip" data-type="restaurant">🍽️ Restaurant</button>
+                <button class="category-chip" data-type="fuel">⛽ Fuel</button>
+                <button class="category-chip" data-type="bank">🏦 Bank</button>
+                <button class="category-chip" data-type="pharmacy">💊 Pharmacy</button>
+                <button class="category-chip" data-type="hotel">🏨 Hotel</button>
+                <button class="category-chip" data-type="police">🚔 Police</button>
+                <button class="category-chip" data-type="park">🌳 Park</button>
+                <button class="category-chip" data-type="temple">🛕 Temple</button>
+            </div>
+            <div class="nearby-radius">
+                <label>Radius: <span id="radius-value">2</span> km</label>
+                <input type="range" id="nearby-radius" min="0.5" max="10" step="0.5" value="2">
+            </div>
+            <button id="btn-search-nearby" class="action-btn">Search Nearby</button>
+            <div id="nearby-results"></div>
+        </div>
+
+        <!-- Analytics Panel -->
+        <div class="sidebar-panel" id="analytics-panel">
+            <h2>Spatial Analytics</h2>
+            <p class="panel-description">Analyze features within the current map viewport.</p>
+            <button id="btn-analyze-viewport" class="action-btn">Analyze Viewport</button>
+            <div id="analytics-results"></div>
+        </div>
+
+        <!-- Geofence Panel -->
+        <div class="sidebar-panel" id="geofence-panel">
+            <h2>Geofencing</h2>
+            <p class="panel-description">Draw a zone on the map and get notified when you enter or leave it.</p>
+            <button id="btn-draw-geofence" class="action-btn">Draw Geofence</button>
+            <button id="btn-clear-geofence" class="action-btn secondary hidden">Clear Geofence</button>
+            <div id="geofence-status"></div>
+        </div>
+    </aside>
+
+    <!-- ─── Map Container ─────────────────────────────────────────────── -->
+    <div id="map"></div>
+
+    <!-- ─── Context Menu (right-click) ─────────────────────────────────── -->
+    <div id="context-menu" class="hidden">
+        <button id="ctx-route-from">📍 Directions from here</button>
+        <button id="ctx-route-to">🏁 Directions to here</button>
+        <button id="ctx-nearby">🔍 Search nearby</button>
+        <button id="ctx-whatishere">❓ What's here?</button>
+    </div>
+
+    <!-- ─── Info Toast ────────────────────────────────────────────────── -->
+    <div id="toast-container"></div>
+
+    <!-- ─── Coordinate Display ────────────────────────────────────────── -->
+    <div id="coords-display">
+        <span id="coords-lat">22.9868°N</span>, <span id="coords-lon">87.8550°E</span>
+        | Zoom: <span id="coords-zoom">8</span>
+    </div>
+
+    <!-- ─── Scripts ───────────────────────────────────────────────────── -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.min.js"></script>
+    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+
+    <script src="js/layers.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/routing.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/geofence.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
