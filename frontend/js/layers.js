@@ -10,11 +10,6 @@ const GeoLayers = (() => {
 
     // ─── Base Map Tile Providers ────────────────────────────────────────
     const baseMaps = {
-        dark: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
-            maxZoom: 19,
-            subdomains: 'abcd',
-        }),
         osm: L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             maxZoom: 19,
@@ -51,8 +46,8 @@ const GeoLayers = (() => {
      * Initialize layers on the given Leaflet map.
      */
     function init(map) {
-        // Start with dark base
-        baseMaps.dark.addTo(map);
+        // Start with terrain base
+        baseMaps.terrain.addTo(map);
 
         // Pre-create WMS layers
         const layerNames = ['planet_osm_roads', 'planet_osm_point', 'planet_osm_polygon', 'planet_osm_line'];

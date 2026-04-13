@@ -49,7 +49,7 @@
                 </svg>
             </button>
             <div class="logo">
-                <span class="logo-icon">🌐</span>
+                <span class="logo-icon">GS</span>
                 <span class="logo-text">GeoSphere <strong>WB+</strong></span>
             </div>
         </div>
@@ -120,46 +120,42 @@
             <div class="layer-group">
                 <h3>Base Map</h3>
                 <label class="layer-toggle">
-                    <input type="radio" name="basemap" value="dark" checked>
-                    <span class="toggle-label">🌙 Dark Mode</span>
-                </label>
-                <label class="layer-toggle">
                     <input type="radio" name="basemap" value="osm">
-                    <span class="toggle-label">🗺️ OpenStreetMap</span>
+                    <span class="toggle-label">OpenStreetMap</span>
                 </label>
                 <label class="layer-toggle">
                     <input type="radio" name="basemap" value="satellite">
-                    <span class="toggle-label">🛰️ Satellite</span>
+                    <span class="toggle-label">Satellite</span>
                 </label>
                 <label class="layer-toggle">
-                    <input type="radio" name="basemap" value="terrain">
-                    <span class="toggle-label">⛰️ Terrain</span>
+                    <input type="radio" name="basemap" value="terrain" checked>
+                    <span class="toggle-label">Terrain</span>
                 </label>
             </div>
             <div class="layer-group">
                 <h3>GeoServer WMS Overlays</h3>
                 <label class="layer-toggle">
                     <input type="checkbox" id="layer-roads" value="planet_osm_roads">
-                    <span class="toggle-label">🛣️ Roads (WMS)</span>
+                    <span class="toggle-label">Roads (WMS)</span>
                 </label>
                 <label class="layer-toggle">
                     <input type="checkbox" id="layer-points" value="planet_osm_point">
-                    <span class="toggle-label">📍 Points of Interest (WMS)</span>
+                    <span class="toggle-label">Points of Interest (WMS)</span>
                 </label>
                 <label class="layer-toggle">
                     <input type="checkbox" id="layer-polygons" value="planet_osm_polygon">
-                    <span class="toggle-label">🏗️ Buildings & Areas (WMS)</span>
+                    <span class="toggle-label">Buildings & Areas (WMS)</span>
                 </label>
                 <label class="layer-toggle">
                     <input type="checkbox" id="layer-lines" value="planet_osm_line">
-                    <span class="toggle-label">〰️ Lines (WMS)</span>
+                    <span class="toggle-label">Lines (WMS)</span>
                 </label>
             </div>
             <div class="layer-group">
                 <h3>Visualization</h3>
                 <label class="layer-toggle">
                     <input type="checkbox" id="layer-heatmap">
-                    <span class="toggle-label">🔥 Heatmap</span>
+                    <span class="toggle-label">Heatmap</span>
                 </label>
             </div>
         </div>
@@ -183,9 +179,9 @@
                 </div>
             </div>
             <div class="route-profiles">
-                <button class="profile-btn active" data-profile="driving" title="Driving">🚗</button>
-                <button class="profile-btn" data-profile="cycling" title="Cycling">🚴</button>
-                <button class="profile-btn" data-profile="walking" title="Walking">🚶</button>
+                <button class="profile-btn active" data-profile="driving" title="Driving">Drive</button>
+                <button class="profile-btn" data-profile="cycling" title="Cycling">Cycle</button>
+                <button class="profile-btn" data-profile="walking" title="Walking">Walk</button>
             </div>
             <button id="btn-get-route" class="action-btn">Get Directions</button>
             <button id="btn-clear-route" class="action-btn secondary hidden">Clear Route</button>
@@ -198,16 +194,16 @@
             <h2>Nearby Places</h2>
             <div class="nearby-categories">
                 <button class="category-chip active" data-type="">All</button>
-                <button class="category-chip" data-type="hospital">🏥 Hospital</button>
-                <button class="category-chip" data-type="school">🏫 School</button>
-                <button class="category-chip" data-type="restaurant">🍽️ Restaurant</button>
-                <button class="category-chip" data-type="fuel">⛽ Fuel</button>
-                <button class="category-chip" data-type="bank">🏦 Bank</button>
-                <button class="category-chip" data-type="pharmacy">💊 Pharmacy</button>
-                <button class="category-chip" data-type="hotel">🏨 Hotel</button>
-                <button class="category-chip" data-type="police">🚔 Police</button>
-                <button class="category-chip" data-type="park">🌳 Park</button>
-                <button class="category-chip" data-type="temple">🛕 Temple</button>
+                <button class="category-chip" data-type="hospital">Hospital</button>
+                <button class="category-chip" data-type="school">School</button>
+                <button class="category-chip" data-type="restaurant">Restaurant</button>
+                <button class="category-chip" data-type="fuel">Fuel</button>
+                <button class="category-chip" data-type="bank">Bank</button>
+                <button class="category-chip" data-type="pharmacy">Pharmacy</button>
+                <button class="category-chip" data-type="hotel">Hotel</button>
+                <button class="category-chip" data-type="police">Police</button>
+                <button class="category-chip" data-type="park">Park</button>
+                <button class="category-chip" data-type="temple">Temple</button>
             </div>
             <div class="nearby-radius">
                 <label>Radius: <span id="radius-value">2</span> km</label>
@@ -240,10 +236,10 @@
 
     <!-- ─── Context Menu (right-click) ─────────────────────────────────── -->
     <div id="context-menu" class="hidden">
-        <button id="ctx-route-from">📍 Directions from here</button>
-        <button id="ctx-route-to">🏁 Directions to here</button>
-        <button id="ctx-nearby">🔍 Search nearby</button>
-        <button id="ctx-whatishere">❓ What's here?</button>
+        <button id="ctx-route-from">Directions from here</button>
+        <button id="ctx-route-to">Directions to here</button>
+        <button id="ctx-nearby">Search nearby</button>
+        <button id="ctx-whatishere">What is here?</button>
     </div>
 
     <!-- ─── Info Toast ────────────────────────────────────────────────── -->

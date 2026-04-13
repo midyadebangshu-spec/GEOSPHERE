@@ -25,8 +25,8 @@ const GeoRouting = (() => {
 
     // Maneuver icons
     const maneuverIcons = {
-        'turn': '↱', 'new name': '→', 'depart': '🚀', 'arrive': '🏁',
-        'merge': '⤵', 'fork': '⑂', 'roundabout': '🔄',
+        'turn': '↱', 'new name': '→', 'depart': '↑', 'arrive': '■',
+        'merge': '⤵', 'fork': '⑂', 'roundabout': '⟳',
         'continue': '→', 'end of road': '⊥', 'use lane': '⇶',
         'default': '➤',
     };
@@ -174,7 +174,7 @@ const GeoRouting = (() => {
         // Draw route polyline
         const coords = route.geometry.coordinates.map(c => [c[1], c[0]]);
         routeControl = L.polyline(coords, {
-            color: '#6366f1',
+            color: '#2563eb',
             weight: 5,
             opacity: 0.85,
             smoothFactor: 1,

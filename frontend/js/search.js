@@ -17,14 +17,14 @@ const GeoSearch = (() => {
 
     // Category icons
     const typeIcons = {
-        city: '🏙️', town: '🏘️', village: '🏡', hamlet: '🛖',
-        residential: '🏠', administrative: '🏛️',
-        hospital: '🏥', school: '🏫', university: '🎓',
-        restaurant: '🍽️', cafe: '☕', bank: '🏦',
-        park: '🌳', garden: '🌺', museum: '🏛️',
-        temple: '🛕', mosque: '🕌', church: '⛪',
-        station: '🚉', bus_station: '🚌', airport: '✈️',
-        default: '📍',
+        city: 'CT', town: 'TN', village: 'VG', hamlet: 'HM',
+        residential: 'RS', administrative: 'AD',
+        hospital: 'H', school: 'S', university: 'U',
+        restaurant: 'R', cafe: 'C', bank: 'B',
+        park: 'PK', garden: 'GD', museum: 'M',
+        temple: 'T', mosque: 'MS', church: 'CH',
+        station: 'ST', bus_station: 'BS', airport: 'AP',
+        default: '•',
     };
 
     function getIcon(type) {

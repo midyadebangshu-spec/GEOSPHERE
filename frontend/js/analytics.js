@@ -74,11 +74,11 @@ const GeoAnalytics = (() => {
 
         // Category icons
         const icons = {
-            hospital: '🏥', school: '🏫', restaurant: '🍽️', fuel: '⛽',
-            bank: '🏦', pharmacy: '💊', place_of_worship: '🛕', park: '🌳',
-            cafe: '☕', college: '🎓', atm: '🏧', police: '🚔',
-            post_office: '📮', library: '📚', cinema: '🎬',
-            supermarket: '🛒', hotel: '🏨', default: '📍',
+            hospital: 'H', school: 'S', restaurant: 'R', fuel: 'F',
+            bank: 'B', pharmacy: 'P', place_of_worship: 'PW', park: 'PK',
+            cafe: 'C', college: 'CL', atm: 'ATM', police: 'PL',
+            post_office: 'PO', library: 'L', cinema: 'CN',
+            supermarket: 'SM', hotel: 'HT', default: '•',
         };
 
         resultsDiv.innerHTML = `
@@ -141,10 +141,10 @@ const GeoAnalytics = (() => {
                     blur: 15,
                     maxZoom: 17,
                     gradient: {
-                        0.0: '#0c1445',
-                        0.2: '#2d1b69',
-                        0.4: '#6366f1',
-                        0.6: '#06b6d4',
+                        0.0: '#dbeafe',
+                        0.2: '#93c5fd',
+                        0.4: '#3b82f6',
+                        0.6: '#0ea5e9',
                         0.8: '#10b981',
                         1.0: '#f59e0b',
                     },

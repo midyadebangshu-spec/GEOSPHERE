@@ -6,33 +6,32 @@
 /* ─── CSS Custom Properties (Design Tokens) ──────────────────────────────── */
 :root {
     /* Color Palette */
-    --bg-primary:      #0a0e17;
-    --bg-secondary:    #111827;
-    --bg-card:         rgba(17, 24, 39, 0.85);
-    --bg-glass:        rgba(15, 23, 42, 0.75);
-    --bg-hover:        rgba(55, 65, 81, 0.5);
-    --bg-active:       rgba(79, 70, 229, 0.15);
+    --bg-primary:      #ffffff;
+    --bg-secondary:    #f8f9fa;
+    --bg-card:         #ffffff;
+    --bg-glass:        rgba(255, 255, 255, 0.96);
+    --bg-hover:        #eef2f7;
+    --bg-active:       #e8f0ff;
 
-    --text-primary:    #f1f5f9;
-    --text-secondary:  #94a3b8;
-    --text-muted:      #64748b;
+    --text-primary:    #1f2937;
+    --text-secondary:  #374151;
+    --text-muted:      #6b7280;
 
-    --accent-primary:  #6366f1;    /* Indigo */
-    --accent-hover:    #818cf8;
-    --accent-glow:     rgba(99, 102, 241, 0.35);
-    --accent-green:    #10b981;
-    --accent-amber:    #f59e0b;
-    --accent-rose:     #f43f5e;
-    --accent-cyan:     #06b6d4;
-    --accent-purple:   #a855f7;
+    --accent-primary:  #2563eb;
+    --accent-hover:    #1d4ed8;
+    --accent-glow:     rgba(37, 99, 235, 0.2);
+    --accent-green:    #059669;
+    --accent-amber:    #d97706;
+    --accent-rose:     #dc2626;
+    --accent-cyan:     #0ea5e9;
 
-    --border-color:    rgba(148, 163, 184, 0.12);
-    --border-glow:     rgba(99, 102, 241, 0.3);
+    --border-color:    #dbe2ea;
+    --border-glow:     rgba(37, 99, 235, 0.22);
 
-    --shadow-sm:       0 1px 3px rgba(0,0,0,0.3);
-    --shadow-md:       0 4px 14px rgba(0,0,0,0.4);
-    --shadow-lg:       0 10px 40px rgba(0,0,0,0.5);
-    --shadow-glow:     0 0 30px rgba(99, 102, 241, 0.15);
+    --shadow-sm:       0 1px 2px rgba(15, 23, 42, 0.06);
+    --shadow-md:       0 6px 18px rgba(15, 23, 42, 0.08);
+    --shadow-lg:       0 14px 30px rgba(15, 23, 42, 0.12);
+    --shadow-glow:     0 0 0 3px rgba(37, 99, 235, 0.12);
 
     --radius-sm:       6px;
     --radius-md:       10px;
@@ -873,13 +872,14 @@ body {
 }
 
 .action-btn:not(.secondary) {
-    background: linear-gradient(135deg, var(--accent-primary), #4f46e5);
+    background: var(--accent-primary);
     color: white;
-    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
 }
 
 .action-btn:not(.secondary):hover {
-    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45);
+    background: var(--accent-hover);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.28);
     transform: translateY(-1px);
 }
 
@@ -1186,4 +1186,276 @@ body {
     font-size: 11px;
     color: var(--text-muted);
     margin-top: 4px;
+}
+
+/* ─── Light Theme Enterprise Override ───────────────────────────────────── */
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-card: #ffffff;
+    --bg-glass: rgba(255, 255, 255, 0.96);
+    --bg-hover: #eef2f7;
+    --bg-active: #e8f0ff;
+
+    --text-primary: #1f2937;
+    --text-secondary: #374151;
+    --text-muted: #6b7280;
+
+    --accent-primary: #2563eb;
+    --accent-hover: #1d4ed8;
+    --accent-glow: rgba(37, 99, 235, 0.2);
+    --accent-green: #059669;
+    --accent-cyan: #0ea5e9;
+    --accent-amber: #d97706;
+    --accent-rose: #dc2626;
+
+    --border-color: #dbe2ea;
+    --border-glow: rgba(37, 99, 235, 0.22);
+
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+    --shadow-md: 0 6px 18px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 14px 30px rgba(15, 23, 42, 0.12);
+    --shadow-glow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+#loading-screen,
+.loader-bar,
+.loader-subtitle,
+.loader-title,
+.loader-title span,
+.globe-core,
+.globe-ring,
+.globe-ring.ring-2 {
+    background: initial;
+    color: initial;
+}
+
+#loading-screen {
+    background: var(--bg-primary);
+}
+
+.globe-ring {
+    border-top-color: var(--accent-primary);
+}
+
+.globe-ring.ring-2 {
+    border-top-color: var(--accent-green);
+}
+
+.globe-core {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+    box-shadow: none;
+}
+
+.loader-title span {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.loader-bar {
+    background: #e5e7eb;
+}
+
+.loader-bar-fill {
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-cyan));
+}
+
+#top-bar {
+    background: var(--bg-glass);
+    border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.logo-text {
+    color: var(--text-primary);
+    letter-spacing: 0.6px;
+}
+
+.logo-text strong {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.icon-btn {
+    background: #ffffff;
+    color: #4b5563;
+    border: 1px solid var(--border-color);
+}
+
+.icon-btn:hover {
+    background: #f8fafc;
+    color: var(--text-primary);
+    border-color: #bfdbfe;
+    box-shadow: var(--shadow-sm);
+}
+
+.search-box {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+}
+
+#search-results {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+}
+
+#sidebar {
+    background: #f8f9fa;
+    border-right: 1px solid var(--border-color);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.sidebar-nav {
+    background: #f3f4f6;
+    border-right: 1px solid var(--border-color);
+}
+
+.sidebar-tab {
+    color: #6b7280;
+}
+
+.sidebar-tab:hover {
+    color: var(--text-primary);
+    background: #eaf0f8;
+}
+
+.sidebar-tab.active {
+    color: var(--accent-primary);
+    background: #e6efff;
+}
+
+.sidebar-panel {
+    background: #f8f9fa;
+}
+
+.sidebar-panel h2 {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.layer-group h3 {
+    color: #4b5563;
+}
+
+.layer-toggle {
+    border: 1px solid transparent;
+    padding: 9px 10px;
+}
+
+.layer-toggle:hover {
+    background: #eef3f9;
+}
+
+.layer-toggle:has(input[type="radio"]:checked),
+.layer-toggle:has(input[type="checkbox"]:checked) {
+    background: #eaf1ff;
+    border-color: #bfd6ff;
+}
+
+.layer-toggle input[type="checkbox"],
+.layer-toggle input[type="radio"] {
+    accent-color: var(--accent-primary);
+}
+
+.layer-toggle input[type="radio"]:checked + .toggle-label,
+.layer-toggle input[type="checkbox"]:checked + .toggle-label {
+    color: #1e40af;
+    font-weight: 600;
+}
+
+.toggle-label {
+    color: var(--text-secondary);
+}
+
+.route-input-group,
+.profile-btn,
+.analytics-card,
+.geofence-status-card,
+#route-info,
+.search-result-item:hover,
+.nearby-item:hover,
+#context-menu button:hover {
+    background: #ffffff;
+}
+
+.profile-btn.active,
+.analytics-card:hover {
+    border-color: #93c5fd;
+    background: #e8f0ff;
+    box-shadow: none;
+}
+
+.route-stat-value,
+.analytics-card-value {
+    background: none;
+    -webkit-text-fill-color: inherit;
+    color: var(--accent-primary);
+}
+
+.action-btn:not(.secondary) {
+    background: var(--accent-primary);
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+}
+
+.action-btn:not(.secondary):hover {
+    background: var(--accent-hover);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.28);
+}
+
+.action-btn.secondary:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+#map {
+    background: #ffffff;
+}
+
+.leaflet-control-attribution,
+.leaflet-control-zoom a,
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip,
+#context-menu,
+.toast,
+#coords-display {
+    background: #ffffff !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow-md);
+}
+
+.leaflet-control-attribution {
+    color: var(--text-muted) !important;
+}
+
+.leaflet-control-attribution a {
+    color: var(--accent-primary) !important;
+}
+
+.analytics-bar-track {
+    background: #e5e7eb;
+}
+
+.analytics-bar-fill {
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-cyan));
+}
+
+.nearby-item-icon.default {
+    background: rgba(37, 99, 235, 0.12);
+}
+
+#coords-display {
+    color: #4b5563;
 }

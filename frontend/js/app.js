@@ -214,9 +214,9 @@
             }
 
             const typeIcons = {
-                hospital: '🏥', school: '🏫', restaurant: '🍽️', fuel: '⛽',
-                bank: '🏦', pharmacy: '💊', hotel: '🏨', police: '🚔',
-                park: '🌳', temple: '🛕', cafe: '☕', default: '📍',
+                hospital: 'H', school: 'S', restaurant: 'R', fuel: 'F',
+                bank: 'B', pharmacy: 'P', hotel: 'HT', police: 'PL',
+                park: 'PK', temple: 'T', cafe: 'C', default: '•',
             };
 
             nearbyResultsDiv.innerHTML = data.features.map((f, i) => {
@@ -250,11 +250,11 @@
                 const marker = L.marker([coords[1], coords[0]])
                     .addTo(map)
                     .bindPopup(`
-                        <h3>${icon} ${escapeHtml(p.name)}</h3>
+                        <h3>${escapeHtml(p.name)}</h3>
                         <div class="popup-detail">Type: ${cat}</div>
-                        ${p.phone ? `<div class="popup-detail">📞 ${p.phone}</div>` : ''}
-                        ${p.website ? `<div class="popup-detail">🌐 <a href="${p.website}" target="_blank">${p.website}</a></div>` : ''}
-                        ${p.opening_hours ? `<div class="popup-detail">🕐 ${p.opening_hours}</div>` : ''}
+                        ${p.phone ? `<div class="popup-detail">Phone: ${p.phone}</div>` : ''}
+                        ${p.website ? `<div class="popup-detail">Website: <a href="${p.website}" target="_blank">${p.website}</a></div>` : ''}
+                        ${p.opening_hours ? `<div class="popup-detail">Hours: ${p.opening_hours}</div>` : ''}
                         <div class="popup-detail" style="margin-top:4px; color:var(--accent-cyan);">${p.distance_m} m away</div>
                     `);
 
@@ -299,17 +299,17 @@
 
                 userLocationMarker = L.circleMarker(latlng, {
                     radius: 8,
-                    color: '#6366f1',
-                    fillColor: '#818cf8',
+                    color: '#2563eb',
+                    fillColor: '#60a5fa',
                     fillOpacity: 0.9,
                     weight: 3,
-                }).addTo(map).bindPopup('📍 You are here').openPopup();
+                }).addTo(map).bindPopup('You are here').openPopup();
 
                 // Add pulse ring
                 L.circleMarker(latlng, {
                     radius: 24,
-                    color: '#6366f1',
-                    fillColor: '#6366f1',
+                    color: '#2563eb',
+                    fillColor: '#2563eb',
                     fillOpacity: 0.1,
                     weight: 1,
                 }).addTo(map);
@@ -330,8 +330,7 @@
         const toast = document.createElement('div');
         toast.className = `toast ${type}`;
 
-        const icons = { info: 'ℹ️', success: '✅', warning: '⚠️', error: '❌' };
-        toast.innerHTML = `<span>${icons[type] || ''}</span> ${escapeHtml(message)}`;
+        toast.innerHTML = `${escapeHtml(message)}`;
 
         container.appendChild(toast);
 
@@ -374,9 +373,9 @@
 
     // ─── Console Welcome ────────────────────────────────────────────────
     console.log(
-        '%c🌐 GeoSphere WB+ %cAdvanced Edition',
-        'color: #6366f1; font-size: 20px; font-weight: bold;',
-        'color: #06b6d4; font-size: 20px; font-weight: 300;'
+        '%cGeoSphere WB+ %cAdvanced Edition',
+        'color: #2563eb; font-size: 20px; font-weight: bold;',
+        'color: #0ea5e9; font-size: 20px; font-weight: 300;'
     );
     console.log('%cWest Bengal Map Platform — Powered by OpenStreetMap', 'color: #94a3b8; font-size: 12px;');
 

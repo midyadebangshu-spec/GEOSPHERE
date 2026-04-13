@@ -144,11 +144,11 @@ const GeoFence = (() => {
 
         if (inside && !isInsideGeofence) {
             isInsideGeofence = true;
-            showToast('🟢 Entered geofence zone!', 'success');
+            showToast('Entered geofence zone.', 'success');
             updateStatus(true);
         } else if (!inside && isInsideGeofence) {
             isInsideGeofence = false;
-            showToast('🔴 Left geofence zone!', 'warning');
+            showToast('Left geofence zone.', 'warning');
             updateStatus(false);
         }
     }
@@ -156,7 +156,7 @@ const GeoFence = (() => {
     function updateStatus(inside) {
         statusDiv.innerHTML = `
             <div class="geofence-status-card ${inside ? 'inside' : 'outside'}">
-                <div class="geofence-status-label">${inside ? '🟢 Inside Zone' : '🔴 Outside Zone'}</div>
+                <div class="geofence-status-label">${inside ? 'Inside Zone' : 'Outside Zone'}</div>
                 <div class="geofence-status-detail">Last update: ${new Date().toLocaleTimeString()}</div>
             </div>
         `;
