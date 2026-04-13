@@ -11,9 +11,9 @@ const GeoSearch = (() => {
     let searchMarker = null;
     let debounceTimer = null;
 
-    const input     = document.getElementById('search-input');
-    const clearBtn  = document.getElementById('search-clear');
-    const results   = document.getElementById('search-results');
+    const input = document.getElementById('search-input');
+    const clearBtn = document.getElementById('search-clear');
+    const results = document.getElementById('search-results');
 
     // Category icons
     const typeIcons = {

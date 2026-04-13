@@ -10,9 +10,9 @@ const GeoAnalytics = (() => {
     let map = null;
     let heatLayer = null;
 
-    const analyzeBtn    = document.getElementById('btn-analyze-viewport');
-    const resultsDiv    = document.getElementById('analytics-results');
-    const heatToggle    = document.getElementById('layer-heatmap');
+    const analyzeBtn = document.getElementById('btn-analyze-viewport');
+    const resultsDiv = document.getElementById('analytics-results');
+    const heatToggle = document.getElementById('layer-heatmap');
 
     function init(leafletMap) {
         map = leafletMap;

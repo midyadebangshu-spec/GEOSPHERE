@@ -14,8 +14,8 @@ const GeoFence = (() => {
     let watchId = null;
     let isInsideGeofence = false;
 
-    const drawBtn   = document.getElementById('btn-draw-geofence');
-    const clearBtn  = document.getElementById('btn-clear-geofence');
+    const drawBtn = document.getElementById('btn-draw-geofence');
+    const clearBtn = document.getElementById('btn-clear-geofence');
     const statusDiv = document.getElementById('geofence-status');
 
     function init(leafletMap) {

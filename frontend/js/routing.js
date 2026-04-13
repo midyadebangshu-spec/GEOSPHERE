@@ -15,13 +15,13 @@ const GeoRouting = (() => {
     let endMarker = null;
     let selectingPoint = null;   // 'start' or 'end'
 
-    const startInput  = document.getElementById('route-start');
-    const endInput    = document.getElementById('route-end');
-    const swapBtn     = document.getElementById('route-swap');
+    const startInput = document.getElementById('route-start');
+    const endInput = document.getElementById('route-end');
+    const swapBtn = document.getElementById('route-swap');
     const getRouteBtn = document.getElementById('btn-get-route');
     const clearRouteBtn = document.getElementById('btn-clear-route');
-    const routeInfo   = document.getElementById('route-info');
-    const routeSteps  = document.getElementById('route-steps');
+    const routeInfo = document.getElementById('route-info');
+    const routeSteps = document.getElementById('route-steps');
 
     // Maneuver icons
     const maneuverIcons = {
@@ -224,8 +224,8 @@ const GeoRouting = (() => {
 
     function clearRoute() {
         if (routeControl) { map.removeLayer(routeControl); routeControl = null; }
-        if (startMarker)  { map.removeLayer(startMarker); startMarker = null; }
-        if (endMarker)    { map.removeLayer(endMarker); endMarker = null; }
+        if (startMarker) { map.removeLayer(startMarker); startMarker = null; }
+        if (endMarker) { map.removeLayer(endMarker); endMarker = null; }
 
         startPoint = null;
         endPoint = null;

@@ -12,9 +12,9 @@
     const API_BASE = window.location.origin;
 
     // ─── West Bengal Center & Bounds ────────────────────────────────────
-    const WB_CENTER  = [22.9868, 87.855];
-    const WB_ZOOM    = 8;
-    const WB_BOUNDS  = L.latLngBounds([21.5, 85.5], [27.2, 89.9]);
+    const WB_CENTER = [22.9868, 87.855];
+    const WB_ZOOM = 8;
+    const WB_BOUNDS = L.latLngBounds([21.5, 85.5], [27.2, 89.9]);
 
     // ─── Map Initialization ─────────────────────────────────────────────
     const map = L.map('map', {
@@ -93,8 +93,8 @@
     });
 
     // ─── Mouse Move — Coordinate Display ────────────────────────────────
-    const coordsLat  = document.getElementById('coords-lat');
-    const coordsLon  = document.getElementById('coords-lon');
+    const coordsLat = document.getElementById('coords-lat');
+    const coordsLon = document.getElementById('coords-lon');
     const coordsZoom = document.getElementById('coords-zoom');
 
     map.on('mousemove', (e) => {
@@ -115,7 +115,7 @@
         ctxLatLng = e.latlng;
 
         ctxMenu.style.left = `${e.originalEvent.clientX}px`;
-        ctxMenu.style.top  = `${e.originalEvent.clientY}px`;
+        ctxMenu.style.top = `${e.originalEvent.clientY}px`;
         ctxMenu.classList.remove('hidden');
     });
 
@@ -171,8 +171,8 @@
 
     // ─── Nearby Search ──────────────────────────────────────────────────
     const nearbyRadiusInput = document.getElementById('nearby-radius');
-    const radiusDisplay     = document.getElementById('radius-value');
-    const nearbyResultsDiv  = document.getElementById('nearby-results');
+    const radiusDisplay = document.getElementById('radius-value');
+    const nearbyResultsDiv = document.getElementById('nearby-results');
 
     nearbyRadiusInput.addEventListener('input', () => {
         radiusDisplay.textContent = nearbyRadiusInput.value;
@@ -194,7 +194,7 @@
 
     async function searchNearby() {
         const center = nearbyCenter || map.getCenter();
-        const type   = document.querySelector('.category-chip.active')?.dataset.type || '';
+        const type = document.querySelector('.category-chip.active')?.dataset.type || '';
         const radius = parseFloat(nearbyRadiusInput.value) * 1000;  // km → m
 
         nearbyResultsDiv.innerHTML = '<p style="color:var(--text-muted); font-size:13px;">Searching...</p>';
@@ -325,7 +325,7 @@
     });
 
     // ─── Toast Notification System ──────────────────────────────────────
-    window.showToast = function(message, type = 'info', duration = 3500) {
+    window.showToast = function (message, type = 'info', duration = 3500) {
         const container = document.getElementById('toast-container');
         const toast = document.createElement('div');
         toast.className = `toast ${type}`;
