@@ -127,6 +127,10 @@ const GeoSearch = (() => {
             .addTo(map)
             .bindPopup(`<h3>${escapeHtml(name.split(',')[0])}</h3><div class="popup-detail">${escapeHtml(name)}</div>`)
             .openPopup();
+
+        window.dispatchEvent(new CustomEvent('geosphere:place-selected', {
+            detail: { lat, lon, name },
+        }));
     }
 
     function clear() {

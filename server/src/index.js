@@ -11,25 +11,29 @@
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../.env') });
 
-const express     = require('express');
-const cors        = require('cors');
-const helmet      = require('helmet');
-const morgan      = require('morgan');
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
 const compression = require('compression');
-const rateLimit   = require('express-rate-limit');
+const rateLimit = require('express-rate-limit');
 
 const { testConnection } = require('./db');
 
 // Route modules
-const nearbyRoutes    = require('./routes/nearby');
-const bboxRoutes      = require('./routes/bbox');
-const reverseRoutes   = require('./routes/reverse');
-const routeRoutes     = require('./routes/route');
-const searchRoutes    = require('./routes/search');
-const tilesRoutes     = require('./routes/tiles');
+const nearbyRoutes = require('./routes/nearby');
+const bboxRoutes = require('./routes/bbox');
+const reverseRoutes = require('./routes/reverse');
+const routeRoutes = require('./routes/route');
+const searchRoutes = require('./routes/search');
+const tilesRoutes = require('./routes/tiles');
 const analyticsRoutes = require('./routes/analytics');
+const institutionsRoutes = require('./routes/institutions');
+const aqiRoutes = require('./routes/aqi');
+const datasetsRoutes = require('./routes/datasets');
+const commonsRoutes = require('./routes/commons');
 
-const app  = express();
+const app = express();
 const PORT = process.env.PORT || 4000;
 
 // ─── Middleware ─────────────────────────────────────────────────────────────
@@ -70,13 +74,17 @@ app.use('/api/', limiter);
 app.use(express.static(path.join(__dirname, '../../frontend')));
 
 // ─── API Routes ─────────────────────────────────────────────────────────────
-app.use('/api/nearby',     nearbyRoutes);
-app.use('/api/bbox',       bboxRoutes);
-app.use('/api/reverse',    reverseRoutes);
-app.use('/api/route',      routeRoutes);
-app.use('/api/search',     searchRoutes);
-app.use('/api/tiles',      tilesRoutes);
-app.use('/api/analytics',  analyticsRoutes);
+app.use('/api/nearby', nearbyRoutes);
+app.use('/api/bbox', bboxRoutes);
+app.use('/api/reverse', reverseRoutes);
+app.use('/api/route', routeRoutes);
+app.use('/api/search', searchRoutes);
+app.use('/api/tiles', tilesRoutes);
+app.use('/api/analytics', analyticsRoutes);
+app.use('/api/institutions', institutionsRoutes);
+app.use('/api/aqi', aqiRoutes);
+app.use('/api/datasets', datasetsRoutes);
+app.use('/api/commons', commonsRoutes);
 
 // ─── Health Check ───────────────────────────────────────────────────────────
 app.get('/api/health', async (req, res) => {

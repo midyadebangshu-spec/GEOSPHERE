@@ -13,15 +13,18 @@ const GeoLayers = (() => {
         osm: L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             maxZoom: 19,
+            maxNativeZoom: 19,
             subdomains: 'abcd',
         }),
         satellite: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             attribution: '&copy; Esri',
-            maxZoom: 18,
+            maxZoom: 19,
+            maxNativeZoom: 18,
         }),
         terrain: L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://opentopomap.org">OpenTopoMap</a>',
-            maxZoom: 17,
+            maxZoom: 19,
+            maxNativeZoom: 17,
         }),
     };
 

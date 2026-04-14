@@ -2,7 +2,7 @@
  * GeoSphere WB+ — Main Application Orchestrator
  * 
  * Initializes the Leaflet map, wires up all modules (layers, search,
- * routing, analytics, geofencing), and handles sidebar navigation,
+ * routing, analytics, weather), and handles sidebar navigation,
  * context menu, and user location.
  */
 
@@ -32,7 +32,7 @@
     GeoSearch.init(map);
     GeoRouting.init(map);
     GeoAnalytics.init(map);
-    GeoFence.init(map);
+    GeoWeather.init(map);
 
     // ─── Nearby Search State ────────────────────────────────────────────
     let nearbyMarkers = [];
@@ -78,12 +78,6 @@
     map.on('click', (e) => {
         // Close context menu
         hideContextMenu();
-
-        // Geofence drawing takes priority
-        if (GeoFence.isDrawing()) {
-            GeoFence.addPoint(e.latlng);
-            return;
-        }
 
         // Route point selection
         if (GeoRouting.isSelecting()) {
@@ -169,6 +163,60 @@
         }
     });
 
+    document.getElementById('ctx-aqi').addEventListener('click', async () => {
+        if (!ctxLatLng) return;
+        hideContextMenu();
+
+        let placeName = `${ctxLatLng.lat.toFixed(5)}, ${ctxLatLng.lng.toFixed(5)}`;
+
+        try {
+            const revRes = await fetch(`${API_BASE}/api/reverse?lat=${ctxLatLng.lat}&lon=${ctxLatLng.lng}`);
+            const revData = await revRes.json();
+            if (revData?.display_name) placeName = revData.display_name;
+        } catch (err) {
+            console.warn('[AQI] Reverse lookup failed:', err);
+        }
+
+        const loadingPopup = L.popup({
+            className: 'aqi-popup',
+            maxWidth: 320,
+        })
+            .setLatLng(ctxLatLng)
+            .setContent(renderAqiLoading(placeName, ctxLatLng))
+            .openOn(map);
+
+        try {
+            const res = await fetch(`${API_BASE}/api/aqi?lat=${ctxLatLng.lat}&lon=${ctxLatLng.lng}&radius=25000`);
+            const data = await res.json();
+
+            if (!res.ok || data.error) {
+                throw new Error(data.error || 'AQI unavailable');
+            }
+
+            loadingPopup.setContent(renderAqiCard(placeName, ctxLatLng, data));
+        } catch (err) {
+            loadingPopup.setContent(renderAqiError(placeName, ctxLatLng, err.message || 'Unknown error'));
+            console.error('[AQI]', err);
+        }
+    });
+
+    document.getElementById('ctx-weather').addEventListener('click', async () => {
+        if (!ctxLatLng) return;
+        hideContextMenu();
+
+        let placeName = `${ctxLatLng.lat.toFixed(5)}, ${ctxLatLng.lng.toFixed(5)}`;
+
+        try {
+            const res = await fetch(`${API_BASE}/api/reverse?lat=${ctxLatLng.lat}&lon=${ctxLatLng.lng}`);
+            const data = await res.json();
+            if (data?.display_name) placeName = data.display_name;
+        } catch (err) {
+            console.warn('[Weather] Reverse lookup failed:', err);
+        }
+
+        GeoWeather.showWeatherOnly(ctxLatLng.lat, ctxLatLng.lng, placeName);
+    });
+
     // ─── Nearby Search ──────────────────────────────────────────────────
     const nearbyRadiusInput = document.getElementById('nearby-radius');
     const radiusDisplay = document.getElementById('radius-value');
@@ -229,7 +277,7 @@
                 const iconClass = typeIcons[cat] ? cat : 'default';
 
                 return `
-                    <div class="nearby-item" data-idx="${i}" data-lat="${f.geometry.coordinates[1]}" data-lon="${f.geometry.coordinates[0]}">
+                    <div class="nearby-item" data-idx="${i}" data-lat="${f.geometry.coordinates[1]}" data-lon="${f.geometry.coordinates[0]}" data-name="${escapeHtml(p.name)}">
                         <div class="nearby-item-icon ${iconClass}">${icon}</div>
                         <div class="nearby-item-info">
                             <div class="nearby-item-name">${escapeHtml(p.name)}</div>
@@ -269,6 +317,10 @@
                     const idx = parseInt(item.dataset.idx);
                     map.flyTo([lat, lon], 16, { duration: 0.8 });
                     nearbyMarkers[idx]?.openPopup();
+
+                    window.dispatchEvent(new CustomEvent('geosphere:place-selected', {
+                        detail: { lat, lon, name: item.dataset.name || 'Selected place' },
+                    }));
                 });
             });
 
@@ -282,20 +334,31 @@
 
     // ─── My Location Button ─────────────────────────────────────────────
     let userLocationMarker = null;
+    let userLocationPulse = null;
 
-    document.getElementById('btn-my-location').addEventListener('click', () => {
+    function resolveUserLocation({
+        showStartToast = false,
+        showSuccessToast = false,
+        centerMap = false,
+        applyRouteStartUi = true,
+    } = {}) {
         if (!('geolocation' in navigator)) {
-            showToast('Geolocation not supported.', 'warning');
+            if (showStartToast) showToast('Geolocation not supported.', 'warning');
             return;
         }
 
-        showToast('Locating you...', 'info');
+        if (showStartToast) showToast('Locating you...', 'info');
 
         navigator.geolocation.getCurrentPosition(
             (pos) => {
-                const latlng = [pos.coords.latitude, pos.coords.longitude];
+                const lat = pos.coords.latitude;
+                const lon = pos.coords.longitude;
+                const latlng = [lat, lon];
+
+                GeoRouting.setDefaultStartFromUser({ lat, lng: lon }, { applyToUi: applyRouteStartUi });
 
                 if (userLocationMarker) map.removeLayer(userLocationMarker);
+                if (userLocationPulse) map.removeLayer(userLocationPulse);
 
                 userLocationMarker = L.circleMarker(latlng, {
                     radius: 8,
@@ -303,10 +366,9 @@
                     fillColor: '#60a5fa',
                     fillOpacity: 0.9,
                     weight: 3,
-                }).addTo(map).bindPopup('You are here').openPopup();
+                }).addTo(map).bindPopup('You are here');
 
-                // Add pulse ring
-                L.circleMarker(latlng, {
+                userLocationPulse = L.circleMarker(latlng, {
                     radius: 24,
                     color: '#2563eb',
                     fillColor: '#2563eb',
@@ -314,15 +376,28 @@
                     weight: 1,
                 }).addTo(map);
 
-                map.flyTo(latlng, 15, { duration: 1.2 });
-                showToast('Location found!', 'success');
+                if (centerMap) {
+                    userLocationMarker.openPopup();
+                    map.flyTo(latlng, 15, { duration: 1.2 });
+                }
+
+                if (showSuccessToast) showToast('Location found!', 'success');
             },
             (err) => {
-                showToast(`Location error: ${err.message}`, 'error');
+                if (showStartToast || showSuccessToast) {
+                    showToast(`Location error: ${err.message}`, 'error');
+                }
             },
             { enableHighAccuracy: true, timeout: 10000 }
         );
+    }
+
+    document.getElementById('btn-my-location').addEventListener('click', () => {
+        resolveUserLocation({ showStartToast: true, showSuccessToast: true, centerMap: true });
     });
+
+    // Seed routing start point with user location by default.
+    resolveUserLocation();
 
     // ─── Toast Notification System ──────────────────────────────────────
     window.showToast = function (message, type = 'info', duration = 3500) {
@@ -349,6 +424,95 @@
     });
 
     // ─── Utility: Escape HTML ───────────────────────────────────────────
+    function renderAqiLoading(placeName, latlng) {
+        return `
+            <div class="aqi-popup-card">
+                <div class="aqi-place">${escapeHtml(placeName.split(',')[0] || 'Selected place')}</div>
+                <div class="aqi-place-sub">${escapeHtml(placeName)}</div>
+                <div class="aqi-loading">Loading AQI...</div>
+                <div class="aqi-coords">${latlng.lat.toFixed(5)}, ${latlng.lng.toFixed(5)}</div>
+            </div>
+        `;
+    }
+
+    function renderAqiError(placeName, latlng, message) {
+        return `
+            <div class="aqi-popup-card">
+                <div class="aqi-place">${escapeHtml(placeName.split(',')[0] || 'Selected place')}</div>
+                <div class="aqi-place-sub">${escapeHtml(placeName)}</div>
+                <div class="aqi-loading error">Unable to load AQI right now.</div>
+                <div class="aqi-subnote">${escapeHtml(message)}</div>
+                <div class="aqi-coords">${latlng.lat.toFixed(5)}, ${latlng.lng.toFixed(5)}</div>
+            </div>
+        `;
+    }
+
+    function renderAqiCard(placeName, latlng, data) {
+        const pollutantRows = Array.isArray(data.pollutants) ? data.pollutants : [];
+        const rowsHtml = pollutantRows.map((p) => {
+            const valueText = formatPollutantValue(p.value);
+            const unitText = p.unit ? escapeHtml(p.unit) : '';
+            return `
+                <div class="aqi-p-row">
+                    <div class="aqi-p-name">${escapeHtml(p.label || p.key || '--')}</div>
+                    <div class="aqi-p-value-wrap">
+                        <span class="aqi-p-value">${valueText}</span>
+                        <span class="aqi-p-unit">${unitText}</span>
+                    </div>
+                    <div class="aqi-p-trend">${renderSparkline(Array.isArray(p.trend) ? p.trend : [])}</div>
+                </div>
+            `;
+        }).join('');
+
+        return `
+            <div class="aqi-popup-card">
+                <div class="aqi-place">${escapeHtml(placeName.split(',')[0] || 'Selected place')}</div>
+                <div class="aqi-place-sub">${escapeHtml(placeName)}</div>
+                <div class="aqi-summary">
+                    <div class="aqi-score">AQI ${data.aqi}</div>
+                    <div class="aqi-cat">${escapeHtml(data.category || 'Unknown')}</div>
+                </div>
+                <div class="aqi-pollutants">
+                    ${rowsHtml}
+                </div>
+                <div class="aqi-subnote">Based on ${escapeHtml(String(data.basis || '').toUpperCase())}${data.location ? ` · ${escapeHtml(data.location)}` : ''}</div>
+                <div class="aqi-coords">${latlng.lat.toFixed(5)}, ${latlng.lng.toFixed(5)}</div>
+            </div>
+        `;
+    }
+
+    function formatPollutantValue(value) {
+        const num = Number(value);
+        if (!Number.isFinite(num)) return '--';
+        if (Math.abs(num) >= 100) return `${Math.round(num)}`;
+        if (Math.abs(num) >= 10) return `${num.toFixed(1).replace(/\.0$/, '')}`;
+        return `${num.toFixed(2).replace(/0+$/, '').replace(/\.$/, '')}`;
+    }
+
+    function renderSparkline(values) {
+        if (!Array.isArray(values) || values.length < 2) {
+            return '<span class="aqi-no-trend">—</span>';
+        }
+
+        const width = 76;
+        const height = 22;
+        const min = Math.min(...values);
+        const max = Math.max(...values);
+        const range = max - min || 1;
+
+        const points = values.map((value, index) => {
+            const x = (index / (values.length - 1)) * (width - 2) + 1;
+            const y = height - 1 - ((value - min) / range) * (height - 4) - 1;
+            return `${x.toFixed(1)},${y.toFixed(1)}`;
+        }).join(' ');
+
+        return `
+            <svg viewBox="0 0 ${width} ${height}" class="aqi-sparkline" aria-hidden="true" preserveAspectRatio="none">
+                <polyline points="${points}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></polyline>
+            </svg>
+        `;
+    }
+
     function escapeHtml(str) {
         if (!str) return '';
         const div = document.createElement('div');

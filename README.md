@@ -100,6 +100,32 @@ curl -sS http://localhost:4000/api/health
 curl -sSI http://localhost:4000 | head -n 5
 ```
 
+### Optional: Enable AQI (OpenAQ)
+
+To show AQI from the map context menu (`Know AQI`), set an OpenAQ API key:
+
+```bash
+cp server/.env.example server/.env  # if not already created
+```
+
+Then edit `server/.env` and set:
+
+```dotenv
+OPENAQ_API_KEY=your_openaq_api_key
+```
+
+Restart the API after updating `.env`.
+
+### Optional: Enable Flickr images in place popup
+
+The place insights popup always tries Wikimedia images. To include Flickr images as well, set:
+
+```dotenv
+FLICKR_API_KEY=your_flickr_api_key
+```
+
+The image API uses in-memory caching and per-client rate limiting to reduce upstream API usage.
+
 ## Service endpoints (typical)
 
 Ports may auto-shift if occupied; `start_all.sh` prints the final active ports.
@@ -109,6 +135,41 @@ Ports may auto-shift if occupied; `start_all.sh` prints the final active ports.
 - OSRM: `http://localhost:<osrm-port>`
 - Nominatim: `http://localhost:<nominatim-port>`
 - API + Frontend: `http://localhost:4000`
+
+## Educational Institutions Integration (West Bengal)
+
+This repo now includes a dedicated institutions data model and API for schools, colleges, and universities.
+
+### 1) Create the institutions table
+
+```bash
+psql -h localhost -U postgres -d osm_wb -f server/sql/institutions_schema.sql
+```
+
+### 2) Ingest WBBSE schools (+ optional OSM export)
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r data_pipeline/requirements.txt
+
+chmod +x data_pipeline/run_school_pipeline.sh
+
+WBBSE_CSV="/absolute/path/to/wbbse_schools.csv" \
+DB_HOST=localhost DB_PORT=5432 DB_NAME=osm_wb DB_USER=postgres DB_PASSWORD=... \
+./data_pipeline/run_school_pipeline.sh
+```
+
+If `WBBSE_CSV` is not provided, the runner attempts to scrape and save the source file into `data_pipeline/downloads/wbbse_schools.csv`. It then imports and deduplicates against existing rows in `institutions`.
+
+### 3) API endpoints
+
+- `GET /api/institutions`
+- `GET /api/institutions?type=school`
+- `GET /api/institutions?near=22.57,88.36&radius=2000`
+- `GET /api/institutions/:id`
+
+Supported filters include `type`, `management`, `district`, `q`, and viewport bbox (`minLat`, `minLon`, `maxLat`, `maxLon`).
 
 ## Re-running safely
 

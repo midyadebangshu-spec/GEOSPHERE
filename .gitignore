@@ -9,6 +9,7 @@ yarn-error.log
 .env.development.local
 .env.test.local
 .env.production.local
+server/.env
 
 # Data and database files
 *.pbf
@@ -16,6 +17,15 @@ yarn-error.log
 nominatim-data/
 nominatim-postgres/
 osrm-data/
+
+# Python / ETL artifacts
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+data_pipeline/downloads/
+data_pipeline/downloads_test/
 
 # Logs
 logs/

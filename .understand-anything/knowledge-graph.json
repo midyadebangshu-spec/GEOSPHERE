@@ -1,0 +1,2847 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "geosphere-wb-api",
+    "languages": [
+      "javascript",
+      "python",
+      "shell",
+      "html",
+      "css",
+      "sql"
+    ],
+    "frameworks": [
+      "Express",
+      "PostgreSQL (pg)",
+      "Docker"
+    ],
+    "description": "GeoSphere WB+ Regional Map Platform for West Bengal, featuring spatial queries, routing proxy, and geocoding services.",
+    "analyzedAt": "2026-04-13T13:05:52.087Z",
+    "gitCommitHash": "0dc515e5583dbcc93c5f62b1d9c8c8baa2498a00"
+  },
+  "nodes": [
+    {
+      "id": "file:.gitignore",
+      "type": "file",
+      "name": ".gitignore",
+      "filePath": ".gitignore",
+      "summary": "Analyzed file providing text code functionality.",
+      "tags": [
+        "text",
+        "code",
+        "analyzed"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:CLOUDFLARE_TUNNEL.md",
+      "type": "document",
+      "name": "CLOUDFLARE_TUNNEL.md",
+      "filePath": "CLOUDFLARE_TUNNEL.md",
+      "summary": "Analyzed file providing markdown docs functionality.",
+      "tags": [
+        "markdown",
+        "docs",
+        "analyzed"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ecosystem.config.js",
+      "type": "file",
+      "name": "ecosystem.config.js",
+      "filePath": "ecosystem.config.js",
+      "summary": "Analyzed file providing javascript code functionality.",
+      "tags": [
+        "javascript",
+        "code",
+        "analyzed"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/css/style.css",
+      "type": "file",
+      "name": "style.css",
+      "filePath": "frontend/css/style.css",
+      "summary": "Analyzed file providing css markup functionality.",
+      "tags": [
+        "css",
+        "markup",
+        "analyzed",
+        "frontend",
+        "ui"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/index.html",
+      "type": "file",
+      "name": "index.html",
+      "filePath": "frontend/index.html",
+      "summary": "Analyzed file providing html markup functionality.",
+      "tags": [
+        "html",
+        "markup",
+        "analyzed",
+        "frontend",
+        "ui"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/js/analytics.js",
+      "type": "file",
+      "name": "analytics.js",
+      "filePath": "frontend/js/analytics.js",
+      "summary": "Analyzed file providing javascript code functionality.",
+      "tags": [
+        "javascript",
+        "code",
+        "analyzed",
+        "frontend",
+        "ui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/js/analytics.js:GeoAnalytics",
+      "type": "function",
+      "name": "GeoAnalytics",
+      "filePath": "frontend/js/analytics.js",
+      "summary": "Function in frontend/js/analytics.js for GeoAnalytics task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/analytics.js:init",
+      "type": "function",
+      "name": "init",
+      "filePath": "frontend/js/analytics.js",
+      "summary": "Function in frontend/js/analytics.js for init task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/analytics.js:analyzeViewport",
+      "type": "function",
+      "name": "analyzeViewport",
+      "filePath": "frontend/js/analytics.js",
+      "summary": "Function in frontend/js/analytics.js for analyzeViewport task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/analytics.js:catch",
+      "type": "function",
+      "name": "catch",
+      "filePath": "frontend/js/analytics.js",
+      "summary": "Function in frontend/js/analytics.js for catch task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/analytics.js:renderSummary",
+      "type": "function",
+      "name": "renderSummary",
+      "filePath": "frontend/js/analytics.js",
+      "summary": "Function in frontend/js/analytics.js for renderSummary task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/analytics.js:loadHeatmap",
+      "type": "function",
+      "name": "loadHeatmap",
+      "filePath": "frontend/js/analytics.js",
+      "summary": "Function in frontend/js/analytics.js for loadHeatmap task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/analytics.js:animateNumber",
+      "type": "function",
+      "name": "animateNumber",
+      "filePath": "frontend/js/analytics.js",
+      "summary": "Function in frontend/js/analytics.js for animateNumber task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/js/app.js",
+      "type": "file",
+      "name": "app.js",
+      "filePath": "frontend/js/app.js",
+      "summary": "Analyzed file providing javascript code functionality.",
+      "tags": [
+        "javascript",
+        "code",
+        "analyzed",
+        "frontend",
+        "ui"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/js/app.js:hideContextMenu",
+      "type": "function",
+      "name": "hideContextMenu",
+      "filePath": "frontend/js/app.js",
+      "summary": "Function in frontend/js/app.js for hideContextMenu task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/app.js:catch",
+      "type": "function",
+      "name": "catch",
+      "filePath": "frontend/js/app.js",
+      "summary": "Function in frontend/js/app.js for catch task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/app.js:searchNearby",
+      "type": "function",
+      "name": "searchNearby",
+      "filePath": "frontend/js/app.js",
+      "summary": "Function in frontend/js/app.js for searchNearby task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/app.js:function",
+      "type": "function",
+      "name": "function",
+      "filePath": "frontend/js/app.js",
+      "summary": "Function in frontend/js/app.js for function task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/app.js:escapeHtml",
+      "type": "function",
+      "name": "escapeHtml",
+      "filePath": "frontend/js/app.js",
+      "summary": "Function in frontend/js/app.js for escapeHtml task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/js/geofence.js",
+      "type": "file",
+      "name": "geofence.js",
+      "filePath": "frontend/js/geofence.js",
+      "summary": "Analyzed file providing javascript code functionality.",
+      "tags": [
+        "javascript",
+        "code",
+        "analyzed",
+        "frontend",
+        "ui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/js/geofence.js:GeoFence",
+      "type": "function",
+      "name": "GeoFence",
+      "filePath": "frontend/js/geofence.js",
+      "summary": "Function in frontend/js/geofence.js for GeoFence task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/geofence.js:init",
+      "type": "function",
+      "name": "init",
+      "filePath": "frontend/js/geofence.js",
+      "summary": "Function in frontend/js/geofence.js for init task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/geofence.js:toggleDrawing",
+      "type": "function",
+      "name": "toggleDrawing",
+      "filePath": "frontend/js/geofence.js",
+      "summary": "Function in frontend/js/geofence.js for toggleDrawing task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/geofence.js:startDrawing",
+      "type": "function",
+      "name": "startDrawing",
+      "filePath": "frontend/js/geofence.js",
+      "summary": "Function in frontend/js/geofence.js for startDrawing task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/geofence.js:addPoint",
+      "type": "function",
+      "name": "addPoint",
+      "filePath": "frontend/js/geofence.js",
+      "summary": "Function in frontend/js/geofence.js for addPoint task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/geofence.js:finishDrawing",
+      "type": "function",
+      "name": "finishDrawing",
+      "filePath": "frontend/js/geofence.js",
+      "summary": "Function in frontend/js/geofence.js for finishDrawing task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/geofence.js:clearGeofence",
+      "type": "function",
+      "name": "clearGeofence",
+      "filePath": "frontend/js/geofence.js",
+      "summary": "Function in frontend/js/geofence.js for clearGeofence task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/geofence.js:startWatching",
+      "type": "function",
+      "name": "startWatching",
+      "filePath": "frontend/js/geofence.js",
+      "summary": "Function in frontend/js/geofence.js for startWatching task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/geofence.js:stopWatching",
+      "type": "function",
+      "name": "stopWatching",
+      "filePath": "frontend/js/geofence.js",
+      "summary": "Function in frontend/js/geofence.js for stopWatching task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/geofence.js:checkGeofence",
+      "type": "function",
+      "name": "checkGeofence",
+      "filePath": "frontend/js/geofence.js",
+      "summary": "Function in frontend/js/geofence.js for checkGeofence task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/geofence.js:updateStatus",
+      "type": "function",
+      "name": "updateStatus",
+      "filePath": "frontend/js/geofence.js",
+      "summary": "Function in frontend/js/geofence.js for updateStatus task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/geofence.js:isPointInsidePolygon",
+      "type": "function",
+      "name": "isPointInsidePolygon",
+      "filePath": "frontend/js/geofence.js",
+      "summary": "Function in frontend/js/geofence.js for isPointInsidePolygon task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/geofence.js:for",
+      "type": "function",
+      "name": "for",
+      "filePath": "frontend/js/geofence.js",
+      "summary": "Function in frontend/js/geofence.js for for task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/geofence.js:isDrawing",
+      "type": "function",
+      "name": "isDrawing",
+      "filePath": "frontend/js/geofence.js",
+      "summary": "Function in frontend/js/geofence.js for isDrawing task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/js/layers.js",
+      "type": "file",
+      "name": "layers.js",
+      "filePath": "frontend/js/layers.js",
+      "summary": "Analyzed file providing javascript code functionality.",
+      "tags": [
+        "javascript",
+        "code",
+        "analyzed",
+        "frontend",
+        "ui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/js/layers.js:GeoLayers",
+      "type": "function",
+      "name": "GeoLayers",
+      "filePath": "frontend/js/layers.js",
+      "summary": "Function in frontend/js/layers.js for GeoLayers task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/layers.js:createWMSLayer",
+      "type": "function",
+      "name": "createWMSLayer",
+      "filePath": "frontend/js/layers.js",
+      "summary": "Function in frontend/js/layers.js for createWMSLayer task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/layers.js:init",
+      "type": "function",
+      "name": "init",
+      "filePath": "frontend/js/layers.js",
+      "summary": "Function in frontend/js/layers.js for init task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/js/routing.js",
+      "type": "file",
+      "name": "routing.js",
+      "filePath": "frontend/js/routing.js",
+      "summary": "Analyzed file providing javascript code functionality.",
+      "tags": [
+        "javascript",
+        "code",
+        "analyzed",
+        "frontend",
+        "ui"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/js/routing.js:GeoRouting",
+      "type": "function",
+      "name": "GeoRouting",
+      "filePath": "frontend/js/routing.js",
+      "summary": "Function in frontend/js/routing.js for GeoRouting task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/routing.js:init",
+      "type": "function",
+      "name": "init",
+      "filePath": "frontend/js/routing.js",
+      "summary": "Function in frontend/js/routing.js for init task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/routing.js:setPointFromMap",
+      "type": "function",
+      "name": "setPointFromMap",
+      "filePath": "frontend/js/routing.js",
+      "summary": "Function in frontend/js/routing.js for setPointFromMap task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/routing.js:setStartPoint",
+      "type": "function",
+      "name": "setStartPoint",
+      "filePath": "frontend/js/routing.js",
+      "summary": "Function in frontend/js/routing.js for setStartPoint task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/routing.js:setEndPoint",
+      "type": "function",
+      "name": "setEndPoint",
+      "filePath": "frontend/js/routing.js",
+      "summary": "Function in frontend/js/routing.js for setEndPoint task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/routing.js:reverseGeocode",
+      "type": "function",
+      "name": "reverseGeocode",
+      "filePath": "frontend/js/routing.js",
+      "summary": "Function in frontend/js/routing.js for reverseGeocode task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/routing.js:catch",
+      "type": "function",
+      "name": "catch",
+      "filePath": "frontend/js/routing.js",
+      "summary": "Function in frontend/js/routing.js for catch task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/routing.js:swapPoints",
+      "type": "function",
+      "name": "swapPoints",
+      "filePath": "frontend/js/routing.js",
+      "summary": "Function in frontend/js/routing.js for swapPoints task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/routing.js:getRoute",
+      "type": "function",
+      "name": "getRoute",
+      "filePath": "frontend/js/routing.js",
+      "summary": "Function in frontend/js/routing.js for getRoute task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/routing.js:displayRoute",
+      "type": "function",
+      "name": "displayRoute",
+      "filePath": "frontend/js/routing.js",
+      "summary": "Function in frontend/js/routing.js for displayRoute task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/routing.js:clearRoute",
+      "type": "function",
+      "name": "clearRoute",
+      "filePath": "frontend/js/routing.js",
+      "summary": "Function in frontend/js/routing.js for clearRoute task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/routing.js:setFrom",
+      "type": "function",
+      "name": "setFrom",
+      "filePath": "frontend/js/routing.js",
+      "summary": "Function in frontend/js/routing.js for setFrom task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/routing.js:setTo",
+      "type": "function",
+      "name": "setTo",
+      "filePath": "frontend/js/routing.js",
+      "summary": "Function in frontend/js/routing.js for setTo task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/routing.js:capitalize",
+      "type": "function",
+      "name": "capitalize",
+      "filePath": "frontend/js/routing.js",
+      "summary": "Function in frontend/js/routing.js for capitalize task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/routing.js:isSelecting",
+      "type": "function",
+      "name": "isSelecting",
+      "filePath": "frontend/js/routing.js",
+      "summary": "Function in frontend/js/routing.js for isSelecting task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/js/search.js",
+      "type": "file",
+      "name": "search.js",
+      "filePath": "frontend/js/search.js",
+      "summary": "Analyzed file providing javascript code functionality.",
+      "tags": [
+        "javascript",
+        "code",
+        "analyzed",
+        "frontend",
+        "ui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/js/search.js:GeoSearch",
+      "type": "function",
+      "name": "GeoSearch",
+      "filePath": "frontend/js/search.js",
+      "summary": "Function in frontend/js/search.js for GeoSearch task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/search.js:getIcon",
+      "type": "function",
+      "name": "getIcon",
+      "filePath": "frontend/js/search.js",
+      "summary": "Function in frontend/js/search.js for getIcon task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/search.js:init",
+      "type": "function",
+      "name": "init",
+      "filePath": "frontend/js/search.js",
+      "summary": "Function in frontend/js/search.js for init task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/search.js:onInput",
+      "type": "function",
+      "name": "onInput",
+      "filePath": "frontend/js/search.js",
+      "summary": "Function in frontend/js/search.js for onInput task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/search.js:search",
+      "type": "function",
+      "name": "search",
+      "filePath": "frontend/js/search.js",
+      "summary": "Function in frontend/js/search.js for search task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/search.js:catch",
+      "type": "function",
+      "name": "catch",
+      "filePath": "frontend/js/search.js",
+      "summary": "Function in frontend/js/search.js for catch task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/search.js:flyTo",
+      "type": "function",
+      "name": "flyTo",
+      "filePath": "frontend/js/search.js",
+      "summary": "Function in frontend/js/search.js for flyTo task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/search.js:clear",
+      "type": "function",
+      "name": "clear",
+      "filePath": "frontend/js/search.js",
+      "summary": "Function in frontend/js/search.js for clear task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/search.js:escapeHtml",
+      "type": "function",
+      "name": "escapeHtml",
+      "filePath": "frontend/js/search.js",
+      "summary": "Function in frontend/js/search.js for escapeHtml task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/js/search.js:setLocation",
+      "type": "function",
+      "name": "setLocation",
+      "filePath": "frontend/js/search.js",
+      "summary": "Function in frontend/js/search.js for setLocation task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:LICENSE",
+      "type": "file",
+      "name": "LICENSE",
+      "filePath": "LICENSE",
+      "summary": "Analyzed file providing text code functionality.",
+      "tags": [
+        "text",
+        "code",
+        "analyzed"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "summary": "Analyzed file providing markdown docs functionality.",
+      "tags": [
+        "markdown",
+        "docs",
+        "analyzed"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:server/.env.example",
+      "type": "file",
+      "name": ".env.example",
+      "filePath": "server/.env.example",
+      "summary": "Analyzed file providing text code functionality.",
+      "tags": [
+        "text",
+        "code",
+        "analyzed",
+        "backend",
+        "api"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:server/package-lock.json",
+      "type": "config",
+      "name": "package-lock.json",
+      "filePath": "server/package-lock.json",
+      "summary": "Analyzed file providing json config functionality.",
+      "tags": [
+        "json",
+        "config",
+        "analyzed",
+        "backend",
+        "api"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:server/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "server/package.json",
+      "summary": "Analyzed file providing json config functionality.",
+      "tags": [
+        "json",
+        "config",
+        "analyzed",
+        "backend",
+        "api"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:server/src/db.js",
+      "type": "file",
+      "name": "db.js",
+      "filePath": "server/src/db.js",
+      "summary": "Analyzed file providing javascript code functionality.",
+      "tags": [
+        "javascript",
+        "code",
+        "analyzed",
+        "backend",
+        "api"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:server/src/db.js:query",
+      "type": "function",
+      "name": "query",
+      "filePath": "server/src/db.js",
+      "summary": "Function in server/src/db.js for query task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:server/src/db.js:catch",
+      "type": "function",
+      "name": "catch",
+      "filePath": "server/src/db.js",
+      "summary": "Function in server/src/db.js for catch task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:server/src/index.js",
+      "type": "file",
+      "name": "index.js",
+      "filePath": "server/src/index.js",
+      "summary": "Analyzed file providing javascript code functionality.",
+      "tags": [
+        "javascript",
+        "code",
+        "analyzed",
+        "backend",
+        "api"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:server/src/index.js:start",
+      "type": "function",
+      "name": "start",
+      "filePath": "server/src/index.js",
+      "summary": "Function in server/src/index.js for start task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:server/src/middleware/auth.js",
+      "type": "file",
+      "name": "auth.js",
+      "filePath": "server/src/middleware/auth.js",
+      "summary": "Analyzed file providing javascript code functionality.",
+      "tags": [
+        "javascript",
+        "code",
+        "analyzed",
+        "backend",
+        "api"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:server/src/middleware/auth.js:requireAuth",
+      "type": "function",
+      "name": "requireAuth",
+      "filePath": "server/src/middleware/auth.js",
+      "summary": "Function in server/src/middleware/auth.js for requireAuth task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:server/src/middleware/auth.js:catch",
+      "type": "function",
+      "name": "catch",
+      "filePath": "server/src/middleware/auth.js",
+      "summary": "Function in server/src/middleware/auth.js for catch task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:server/src/middleware/auth.js:generateToken",
+      "type": "function",
+      "name": "generateToken",
+      "filePath": "server/src/middleware/auth.js",
+      "summary": "Function in server/src/middleware/auth.js for generateToken task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:server/src/middleware/validate.js",
+      "type": "file",
+      "name": "validate.js",
+      "filePath": "server/src/middleware/validate.js",
+      "summary": "Analyzed file providing javascript code functionality.",
+      "tags": [
+        "javascript",
+        "code",
+        "analyzed",
+        "backend",
+        "api"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:server/src/middleware/validate.js:validateCoords",
+      "type": "function",
+      "name": "validateCoords",
+      "filePath": "server/src/middleware/validate.js",
+      "summary": "Function in server/src/middleware/validate.js for validateCoords task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:server/src/middleware/validate.js:validateBbox",
+      "type": "function",
+      "name": "validateBbox",
+      "filePath": "server/src/middleware/validate.js",
+      "summary": "Function in server/src/middleware/validate.js for validateBbox task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:server/src/middleware/validate.js:validatePositiveNum",
+      "type": "function",
+      "name": "validatePositiveNum",
+      "filePath": "server/src/middleware/validate.js",
+      "summary": "Function in server/src/middleware/validate.js for validatePositiveNum task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:server/src/middleware/validate.js:sanitizeLike",
+      "type": "function",
+      "name": "sanitizeLike",
+      "filePath": "server/src/middleware/validate.js",
+      "summary": "Function in server/src/middleware/validate.js for sanitizeLike task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:server/src/routes/analytics.js",
+      "type": "file",
+      "name": "analytics.js",
+      "filePath": "server/src/routes/analytics.js",
+      "summary": "Analyzed file providing javascript code functionality.",
+      "tags": [
+        "javascript",
+        "code",
+        "analyzed",
+        "backend",
+        "api"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:server/src/routes/analytics.js:catch",
+      "type": "function",
+      "name": "catch",
+      "filePath": "server/src/routes/analytics.js",
+      "summary": "Function in server/src/routes/analytics.js for catch task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:server/src/routes/bbox.js",
+      "type": "file",
+      "name": "bbox.js",
+      "filePath": "server/src/routes/bbox.js",
+      "summary": "Analyzed file providing javascript code functionality.",
+      "tags": [
+        "javascript",
+        "code",
+        "analyzed",
+        "backend",
+        "api"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:server/src/routes/bbox.js:catch",
+      "type": "function",
+      "name": "catch",
+      "filePath": "server/src/routes/bbox.js",
+      "summary": "Function in server/src/routes/bbox.js for catch task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:server/src/routes/nearby.js",
+      "type": "file",
+      "name": "nearby.js",
+      "filePath": "server/src/routes/nearby.js",
+      "summary": "Analyzed file providing javascript code functionality.",
+      "tags": [
+        "javascript",
+        "code",
+        "analyzed",
+        "backend",
+        "api"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:server/src/routes/nearby.js:catch",
+      "type": "function",
+      "name": "catch",
+      "filePath": "server/src/routes/nearby.js",
+      "summary": "Function in server/src/routes/nearby.js for catch task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:server/src/routes/reverse.js",
+      "type": "file",
+      "name": "reverse.js",
+      "filePath": "server/src/routes/reverse.js",
+      "summary": "Analyzed file providing javascript code functionality.",
+      "tags": [
+        "javascript",
+        "code",
+        "analyzed",
+        "backend",
+        "api"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:server/src/routes/reverse.js:catch",
+      "type": "function",
+      "name": "catch",
+      "filePath": "server/src/routes/reverse.js",
+      "summary": "Function in server/src/routes/reverse.js for catch task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:server/src/routes/route.js",
+      "type": "file",
+      "name": "route.js",
+      "filePath": "server/src/routes/route.js",
+      "summary": "Analyzed file providing javascript code functionality.",
+      "tags": [
+        "javascript",
+        "code",
+        "analyzed",
+        "backend",
+        "api"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:server/src/routes/route.js:for",
+      "type": "function",
+      "name": "for",
+      "filePath": "server/src/routes/route.js",
+      "summary": "Function in server/src/routes/route.js for for task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:server/src/routes/route.js:catch",
+      "type": "function",
+      "name": "catch",
+      "filePath": "server/src/routes/route.js",
+      "summary": "Function in server/src/routes/route.js for catch task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:server/src/routes/search.js",
+      "type": "file",
+      "name": "search.js",
+      "filePath": "server/src/routes/search.js",
+      "summary": "Analyzed file providing javascript code functionality.",
+      "tags": [
+        "javascript",
+        "code",
+        "analyzed",
+        "backend",
+        "api"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:server/src/routes/search.js:catch",
+      "type": "function",
+      "name": "catch",
+      "filePath": "server/src/routes/search.js",
+      "summary": "Function in server/src/routes/search.js for catch task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:server/src/routes/tiles.js",
+      "type": "file",
+      "name": "tiles.js",
+      "filePath": "server/src/routes/tiles.js",
+      "summary": "Analyzed file providing javascript code functionality.",
+      "tags": [
+        "javascript",
+        "code",
+        "analyzed",
+        "backend",
+        "api"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:server/src/routes/tiles.js:catch",
+      "type": "function",
+      "name": "catch",
+      "filePath": "server/src/routes/tiles.js",
+      "summary": "Function in server/src/routes/tiles.js for catch task.",
+      "tags": [
+        "function",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:setup_data_pipeline.sh",
+      "type": "file",
+      "name": "setup_data_pipeline.sh",
+      "filePath": "setup_data_pipeline.sh",
+      "summary": "Analyzed file providing shell script functionality.",
+      "tags": [
+        "shell",
+        "script",
+        "analyzed",
+        "data-pipeline",
+        "etl"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:setup_data_pipeline.sh:log",
+      "type": "function",
+      "name": "log",
+      "filePath": "setup_data_pipeline.sh",
+      "summary": "Function in setup_data_pipeline.sh for log task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_data_pipeline.sh:warn",
+      "type": "function",
+      "name": "warn",
+      "filePath": "setup_data_pipeline.sh",
+      "summary": "Function in setup_data_pipeline.sh for warn task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_data_pipeline.sh:err",
+      "type": "function",
+      "name": "err",
+      "filePath": "setup_data_pipeline.sh",
+      "summary": "Function in setup_data_pipeline.sh for err task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_data_pipeline.sh:cleanup",
+      "type": "function",
+      "name": "cleanup",
+      "filePath": "setup_data_pipeline.sh",
+      "summary": "Function in setup_data_pipeline.sh for cleanup task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:setup_geoserver.sh",
+      "type": "file",
+      "name": "setup_geoserver.sh",
+      "filePath": "setup_geoserver.sh",
+      "summary": "Analyzed file providing shell script functionality.",
+      "tags": [
+        "shell",
+        "script",
+        "analyzed",
+        "backend",
+        "api"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:setup_geoserver.sh:log",
+      "type": "function",
+      "name": "log",
+      "filePath": "setup_geoserver.sh",
+      "summary": "Function in setup_geoserver.sh for log task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_geoserver.sh:warn",
+      "type": "function",
+      "name": "warn",
+      "filePath": "setup_geoserver.sh",
+      "summary": "Function in setup_geoserver.sh for warn task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_geoserver.sh:err",
+      "type": "function",
+      "name": "err",
+      "filePath": "setup_geoserver.sh",
+      "summary": "Function in setup_geoserver.sh for err task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_geoserver.sh:wait_for_geoserver",
+      "type": "function",
+      "name": "wait_for_geoserver",
+      "filePath": "setup_geoserver.sh",
+      "summary": "Function in setup_geoserver.sh for wait_for_geoserver task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_geoserver.sh:rest_exists",
+      "type": "function",
+      "name": "rest_exists",
+      "filePath": "setup_geoserver.sh",
+      "summary": "Function in setup_geoserver.sh for rest_exists task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_geoserver.sh:get_listener_pid",
+      "type": "function",
+      "name": "get_listener_pid",
+      "filePath": "setup_geoserver.sh",
+      "summary": "Function in setup_geoserver.sh for get_listener_pid task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_geoserver.sh:build_store_json",
+      "type": "function",
+      "name": "build_store_json",
+      "filePath": "setup_geoserver.sh",
+      "summary": "Function in setup_geoserver.sh for build_store_json task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_geoserver.sh:build_layer_json",
+      "type": "function",
+      "name": "build_layer_json",
+      "filePath": "setup_geoserver.sh",
+      "summary": "Function in setup_geoserver.sh for build_layer_json task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_geoserver.sh:prepare_db_credentials",
+      "type": "function",
+      "name": "prepare_db_credentials",
+      "filePath": "setup_geoserver.sh",
+      "summary": "Function in setup_geoserver.sh for prepare_db_credentials task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_geoserver.sh:rest_call",
+      "type": "function",
+      "name": "rest_call",
+      "filePath": "setup_geoserver.sh",
+      "summary": "Function in setup_geoserver.sh for rest_call task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:setup_nominatim.sh",
+      "type": "file",
+      "name": "setup_nominatim.sh",
+      "filePath": "setup_nominatim.sh",
+      "summary": "Analyzed file providing shell script functionality.",
+      "tags": [
+        "shell",
+        "script",
+        "analyzed"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:setup_nominatim.sh:log",
+      "type": "function",
+      "name": "log",
+      "filePath": "setup_nominatim.sh",
+      "summary": "Function in setup_nominatim.sh for log task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_nominatim.sh:warn",
+      "type": "function",
+      "name": "warn",
+      "filePath": "setup_nominatim.sh",
+      "summary": "Function in setup_nominatim.sh for warn task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_nominatim.sh:err",
+      "type": "function",
+      "name": "err",
+      "filePath": "setup_nominatim.sh",
+      "summary": "Function in setup_nominatim.sh for err task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_nominatim.sh:cleanup",
+      "type": "function",
+      "name": "cleanup",
+      "filePath": "setup_nominatim.sh",
+      "summary": "Function in setup_nominatim.sh for cleanup task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_nominatim.sh:get_listener_pid",
+      "type": "function",
+      "name": "get_listener_pid",
+      "filePath": "setup_nominatim.sh",
+      "summary": "Function in setup_nominatim.sh for get_listener_pid task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_nominatim.sh:persist_nom_state",
+      "type": "function",
+      "name": "persist_nom_state",
+      "filePath": "setup_nominatim.sh",
+      "summary": "Function in setup_nominatim.sh for persist_nom_state task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_nominatim.sh:is_nominatim_ready",
+      "type": "function",
+      "name": "is_nominatim_ready",
+      "filePath": "setup_nominatim.sh",
+      "summary": "Function in setup_nominatim.sh for is_nominatim_ready task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_nominatim.sh:generate_password",
+      "type": "function",
+      "name": "generate_password",
+      "filePath": "setup_nominatim.sh",
+      "summary": "Function in setup_nominatim.sh for generate_password task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_nominatim.sh:ensure_docker_running",
+      "type": "function",
+      "name": "ensure_docker_running",
+      "filePath": "setup_nominatim.sh",
+      "summary": "Function in setup_nominatim.sh for ensure_docker_running task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:setup_osrm.sh",
+      "type": "file",
+      "name": "setup_osrm.sh",
+      "filePath": "setup_osrm.sh",
+      "summary": "Analyzed file providing shell script functionality.",
+      "tags": [
+        "shell",
+        "script",
+        "analyzed"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:setup_osrm.sh:log",
+      "type": "function",
+      "name": "log",
+      "filePath": "setup_osrm.sh",
+      "summary": "Function in setup_osrm.sh for log task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_osrm.sh:warn",
+      "type": "function",
+      "name": "warn",
+      "filePath": "setup_osrm.sh",
+      "summary": "Function in setup_osrm.sh for warn task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_osrm.sh:err",
+      "type": "function",
+      "name": "err",
+      "filePath": "setup_osrm.sh",
+      "summary": "Function in setup_osrm.sh for err task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_osrm.sh:cleanup",
+      "type": "function",
+      "name": "cleanup",
+      "filePath": "setup_osrm.sh",
+      "summary": "Function in setup_osrm.sh for cleanup task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_osrm.sh:get_listener_pid",
+      "type": "function",
+      "name": "get_listener_pid",
+      "filePath": "setup_osrm.sh",
+      "summary": "Function in setup_osrm.sh for get_listener_pid task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_osrm.sh:get_pbf_fingerprint",
+      "type": "function",
+      "name": "get_pbf_fingerprint",
+      "filePath": "setup_osrm.sh",
+      "summary": "Function in setup_osrm.sh for get_pbf_fingerprint task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_osrm.sh:validate_osrm_artifacts",
+      "type": "function",
+      "name": "validate_osrm_artifacts",
+      "filePath": "setup_osrm.sh",
+      "summary": "Function in setup_osrm.sh for validate_osrm_artifacts task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_osrm.sh:persist_osrm_state",
+      "type": "function",
+      "name": "persist_osrm_state",
+      "filePath": "setup_osrm.sh",
+      "summary": "Function in setup_osrm.sh for persist_osrm_state task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:setup_osrm.sh:ensure_docker_running",
+      "type": "function",
+      "name": "ensure_docker_running",
+      "filePath": "setup_osrm.sh",
+      "summary": "Function in setup_osrm.sh for ensure_docker_running task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:start_all.sh",
+      "type": "file",
+      "name": "start_all.sh",
+      "filePath": "start_all.sh",
+      "summary": "Analyzed file providing shell script functionality.",
+      "tags": [
+        "shell",
+        "script",
+        "analyzed"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:start_all.sh:log",
+      "type": "function",
+      "name": "log",
+      "filePath": "start_all.sh",
+      "summary": "Function in start_all.sh for log task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:start_all.sh:err",
+      "type": "function",
+      "name": "err",
+      "filePath": "start_all.sh",
+      "summary": "Function in start_all.sh for err task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:start_all.sh:update_env_var",
+      "type": "function",
+      "name": "update_env_var",
+      "filePath": "start_all.sh",
+      "summary": "Function in start_all.sh for update_env_var task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:start_all.sh:container_host_port",
+      "type": "function",
+      "name": "container_host_port",
+      "filePath": "start_all.sh",
+      "summary": "Function in start_all.sh for container_host_port task.",
+      "tags": [
+        "function",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:start_tunnel_quick.sh",
+      "type": "file",
+      "name": "start_tunnel_quick.sh",
+      "filePath": "start_tunnel_quick.sh",
+      "summary": "Analyzed file providing shell script functionality.",
+      "tags": [
+        "shell",
+        "script",
+        "analyzed"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:frontend/js/analytics.js",
+      "target": "function:frontend/js/analytics.js:GeoAnalytics",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/analytics.js",
+      "target": "function:frontend/js/analytics.js:init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/analytics.js",
+      "target": "function:frontend/js/analytics.js:analyzeViewport",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/analytics.js",
+      "target": "function:frontend/js/analytics.js:catch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/analytics.js",
+      "target": "function:frontend/js/analytics.js:renderSummary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/analytics.js",
+      "target": "function:frontend/js/analytics.js:loadHeatmap",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/analytics.js",
+      "target": "function:frontend/js/analytics.js:animateNumber",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/app.js",
+      "target": "function:frontend/js/app.js:hideContextMenu",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/app.js",
+      "target": "function:frontend/js/app.js:catch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/app.js",
+      "target": "function:frontend/js/app.js:searchNearby",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/app.js",
+      "target": "function:frontend/js/app.js:function",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/app.js",
+      "target": "function:frontend/js/app.js:escapeHtml",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/geofence.js",
+      "target": "function:frontend/js/geofence.js:GeoFence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/geofence.js",
+      "target": "function:frontend/js/geofence.js:init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/geofence.js",
+      "target": "function:frontend/js/geofence.js:toggleDrawing",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/geofence.js",
+      "target": "function:frontend/js/geofence.js:startDrawing",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/geofence.js",
+      "target": "function:frontend/js/geofence.js:addPoint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/geofence.js",
+      "target": "function:frontend/js/geofence.js:finishDrawing",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/geofence.js",
+      "target": "function:frontend/js/geofence.js:clearGeofence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/geofence.js",
+      "target": "function:frontend/js/geofence.js:startWatching",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/geofence.js",
+      "target": "function:frontend/js/geofence.js:stopWatching",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/geofence.js",
+      "target": "function:frontend/js/geofence.js:checkGeofence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/geofence.js",
+      "target": "function:frontend/js/geofence.js:updateStatus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/geofence.js",
+      "target": "function:frontend/js/geofence.js:isPointInsidePolygon",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/geofence.js",
+      "target": "function:frontend/js/geofence.js:for",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/geofence.js",
+      "target": "function:frontend/js/geofence.js:isDrawing",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/layers.js",
+      "target": "function:frontend/js/layers.js:GeoLayers",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/layers.js",
+      "target": "function:frontend/js/layers.js:createWMSLayer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/layers.js",
+      "target": "function:frontend/js/layers.js:init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/routing.js",
+      "target": "function:frontend/js/routing.js:GeoRouting",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/routing.js",
+      "target": "function:frontend/js/routing.js:init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/routing.js",
+      "target": "function:frontend/js/routing.js:setPointFromMap",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/routing.js",
+      "target": "function:frontend/js/routing.js:setStartPoint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/routing.js",
+      "target": "function:frontend/js/routing.js:setEndPoint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/routing.js",
+      "target": "function:frontend/js/routing.js:reverseGeocode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/routing.js",
+      "target": "function:frontend/js/routing.js:catch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/routing.js",
+      "target": "function:frontend/js/routing.js:swapPoints",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/routing.js",
+      "target": "function:frontend/js/routing.js:getRoute",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/routing.js",
+      "target": "function:frontend/js/routing.js:displayRoute",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/routing.js",
+      "target": "function:frontend/js/routing.js:clearRoute",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/routing.js",
+      "target": "function:frontend/js/routing.js:setFrom",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/routing.js",
+      "target": "function:frontend/js/routing.js:setTo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/routing.js",
+      "target": "function:frontend/js/routing.js:capitalize",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/routing.js",
+      "target": "function:frontend/js/routing.js:isSelecting",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/search.js",
+      "target": "function:frontend/js/search.js:GeoSearch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/search.js",
+      "target": "function:frontend/js/search.js:getIcon",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/search.js",
+      "target": "function:frontend/js/search.js:init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/search.js",
+      "target": "function:frontend/js/search.js:onInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/search.js",
+      "target": "function:frontend/js/search.js:search",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/search.js",
+      "target": "function:frontend/js/search.js:catch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/search.js",
+      "target": "function:frontend/js/search.js:flyTo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/search.js",
+      "target": "function:frontend/js/search.js:clear",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/search.js",
+      "target": "function:frontend/js/search.js:escapeHtml",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/js/search.js",
+      "target": "function:frontend/js/search.js:setLocation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "config:server/package-lock.json",
+      "target": "file:server/src/index.js",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:server/package.json",
+      "target": "file:server/src/index.js",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:server/src/db.js",
+      "target": "function:server/src/db.js:query",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:server/src/db.js",
+      "target": "function:server/src/db.js:catch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:server/src/index.js",
+      "target": "function:server/src/index.js:start",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:server/src/index.js",
+      "target": "file:server/src/db.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:server/src/index.js",
+      "target": "file:server/src/routes/nearby.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:server/src/index.js",
+      "target": "file:server/src/routes/bbox.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:server/src/index.js",
+      "target": "file:server/src/routes/reverse.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:server/src/index.js",
+      "target": "file:server/src/routes/route.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:server/src/index.js",
+      "target": "file:server/src/routes/search.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:server/src/index.js",
+      "target": "file:server/src/routes/tiles.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:server/src/index.js",
+      "target": "file:server/src/routes/analytics.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:server/src/middleware/auth.js",
+      "target": "function:server/src/middleware/auth.js:requireAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:server/src/middleware/auth.js",
+      "target": "function:server/src/middleware/auth.js:catch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:server/src/middleware/auth.js",
+      "target": "function:server/src/middleware/auth.js:generateToken",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:server/src/middleware/auth.js",
+      "target": "file:server/src/middleware/auth.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:server/src/middleware/validate.js",
+      "target": "function:server/src/middleware/validate.js:validateCoords",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:server/src/middleware/validate.js",
+      "target": "function:server/src/middleware/validate.js:validateBbox",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:server/src/middleware/validate.js",
+      "target": "function:server/src/middleware/validate.js:validatePositiveNum",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:server/src/middleware/validate.js",
+      "target": "function:server/src/middleware/validate.js:sanitizeLike",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:server/src/routes/analytics.js",
+      "target": "function:server/src/routes/analytics.js:catch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:server/src/routes/analytics.js",
+      "target": "file:server/src/db.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:server/src/routes/analytics.js",
+      "target": "file:server/src/middleware/validate.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:server/src/routes/bbox.js",
+      "target": "function:server/src/routes/bbox.js:catch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:server/src/routes/bbox.js",
+      "target": "file:server/src/db.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:server/src/routes/bbox.js",
+      "target": "file:server/src/middleware/validate.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:server/src/routes/nearby.js",
+      "target": "function:server/src/routes/nearby.js:catch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:server/src/routes/nearby.js",
+      "target": "file:server/src/db.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:server/src/routes/nearby.js",
+      "target": "file:server/src/middleware/validate.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:server/src/routes/reverse.js",
+      "target": "function:server/src/routes/reverse.js:catch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:server/src/routes/reverse.js",
+      "target": "file:server/src/middleware/validate.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:server/src/routes/route.js",
+      "target": "function:server/src/routes/route.js:for",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:server/src/routes/route.js",
+      "target": "function:server/src/routes/route.js:catch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:server/src/routes/route.js",
+      "target": "file:server/src/middleware/validate.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:server/src/routes/search.js",
+      "target": "function:server/src/routes/search.js:catch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:server/src/routes/search.js",
+      "target": "file:server/src/db.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:server/src/routes/tiles.js",
+      "target": "function:server/src/routes/tiles.js:catch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_data_pipeline.sh",
+      "target": "function:setup_data_pipeline.sh:log",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_data_pipeline.sh",
+      "target": "function:setup_data_pipeline.sh:warn",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_data_pipeline.sh",
+      "target": "function:setup_data_pipeline.sh:err",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_data_pipeline.sh",
+      "target": "function:setup_data_pipeline.sh:cleanup",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_geoserver.sh",
+      "target": "function:setup_geoserver.sh:log",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_geoserver.sh",
+      "target": "function:setup_geoserver.sh:warn",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_geoserver.sh",
+      "target": "function:setup_geoserver.sh:err",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_geoserver.sh",
+      "target": "function:setup_geoserver.sh:wait_for_geoserver",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_geoserver.sh",
+      "target": "function:setup_geoserver.sh:rest_exists",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_geoserver.sh",
+      "target": "function:setup_geoserver.sh:get_listener_pid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_geoserver.sh",
+      "target": "function:setup_geoserver.sh:build_store_json",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_geoserver.sh",
+      "target": "function:setup_geoserver.sh:build_layer_json",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_geoserver.sh",
+      "target": "function:setup_geoserver.sh:prepare_db_credentials",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_geoserver.sh",
+      "target": "function:setup_geoserver.sh:rest_call",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_nominatim.sh",
+      "target": "function:setup_nominatim.sh:log",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_nominatim.sh",
+      "target": "function:setup_nominatim.sh:warn",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_nominatim.sh",
+      "target": "function:setup_nominatim.sh:err",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_nominatim.sh",
+      "target": "function:setup_nominatim.sh:cleanup",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_nominatim.sh",
+      "target": "function:setup_nominatim.sh:get_listener_pid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_nominatim.sh",
+      "target": "function:setup_nominatim.sh:persist_nom_state",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_nominatim.sh",
+      "target": "function:setup_nominatim.sh:is_nominatim_ready",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_nominatim.sh",
+      "target": "function:setup_nominatim.sh:generate_password",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_nominatim.sh",
+      "target": "function:setup_nominatim.sh:ensure_docker_running",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_osrm.sh",
+      "target": "function:setup_osrm.sh:log",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_osrm.sh",
+      "target": "function:setup_osrm.sh:warn",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_osrm.sh",
+      "target": "function:setup_osrm.sh:err",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_osrm.sh",
+      "target": "function:setup_osrm.sh:cleanup",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_osrm.sh",
+      "target": "function:setup_osrm.sh:get_listener_pid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_osrm.sh",
+      "target": "function:setup_osrm.sh:get_pbf_fingerprint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_osrm.sh",
+      "target": "function:setup_osrm.sh:validate_osrm_artifacts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_osrm.sh",
+      "target": "function:setup_osrm.sh:persist_osrm_state",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:setup_osrm.sh",
+      "target": "function:setup_osrm.sh:ensure_docker_running",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:start_all.sh",
+      "target": "function:start_all.sh:log",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:start_all.sh",
+      "target": "function:start_all.sh:err",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:start_all.sh",
+      "target": "function:start_all.sh:update_env_var",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:start_all.sh",
+      "target": "function:start_all.sh:container_host_port",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    }
+  ],
+  "layers": [
+    {
+      "id": "layer:api",
+      "name": "API Layer",
+      "description": "Express.js routes and handlers for spatial queries, routing proxy, and search.",
+      "nodeIds": [
+        "file:server/src/routes/analytics.js",
+        "file:server/src/routes/bbox.js",
+        "file:server/src/routes/nearby.js",
+        "file:server/src/routes/reverse.js",
+        "file:server/src/routes/route.js",
+        "file:server/src/routes/search.js",
+        "file:server/src/routes/tiles.js"
+      ]
+    },
+    {
+      "id": "layer:middleware",
+      "name": "Middleware Layer",
+      "description": "Request validation, authentication, and error handling middleware.",
+      "nodeIds": [
+        "file:server/src/middleware/auth.js",
+        "file:server/src/middleware/validate.js"
+      ]
+    },
+    {
+      "id": "layer:service",
+      "name": "Service Layer",
+      "description": "Core backend logic and database connectivity.",
+      "nodeIds": [
+        "file:server/src/db.js",
+        "file:server/src/index.js"
+      ]
+    },
+    {
+      "id": "layer:ui",
+      "name": "UI Frontend",
+      "description": "Client-side map interface and layer management.",
+      "nodeIds": [
+        "file:frontend/index.html",
+        "file:frontend/js/app.js",
+        "file:frontend/js/layers.js"
+      ]
+    },
+    {
+      "id": "layer:data-pipeline",
+      "name": "Data Pipeline",
+      "description": "Scripts for fetching, parsing, and transforming regional health/education data.",
+      "nodeIds": []
+    },
+    {
+      "id": "layer:data",
+      "name": "Database Schema",
+      "description": "SQL schema definitions and migrations.",
+      "nodeIds": []
+    },
+    {
+      "id": "layer:infrastructure",
+      "name": "Infrastructure & Scripts",
+      "description": "Deployment scripts and project-level automation.",
+      "nodeIds": [
+        "file:setup_data_pipeline.sh",
+        "file:setup_geoserver.sh",
+        "file:setup_nominatim.sh",
+        "file:setup_osrm.sh",
+        "file:start_all.sh",
+        "file:start_tunnel_quick.sh",
+        "document:CLOUDFLARE_TUNNEL.md"
+      ]
+    },
+    {
+      "id": "layer:config",
+      "name": "Configuration",
+      "description": "Project-level configuration and environment templates.",
+      "nodeIds": [
+        "config:server/package.json",
+        "file:server/.env.example",
+        "file:ecosystem.config.js"
+      ]
+    },
+    {
+      "id": "layer:documentation",
+      "name": "Documentation",
+      "description": "Project overview and guides.",
+      "nodeIds": [
+        "document:README.md"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "Project Overview",
+      "description": "GeoSphere WB+ is a regional map platform for West Bengal. Start with the README to understand the project architecture, including integration with PostGIS, OSRM, and Nominatim.",
+      "nodeIds": [
+        "document:README.md"
+      ]
+    },
+    {
+      "order": 2,
+      "title": "Backend Entry Point",
+      "description": "The server entry point initializes the Express application, sets up middleware (compression, CORS, logging), and mounts the API routes. It is the core of the Node.js backend.",
+      "nodeIds": [
+        "file:server/src/index.js"
+      ]
+    },
+    {
+      "order": 3,
+      "title": "Data Connectivity",
+      "description": "The db module manages the connection to the PostgreSQL/PostGIS database, facilitating spatial queries that power the platform's map features.",
+      "nodeIds": [
+        "file:server/src/db.js"
+      ]
+    },
+    {
+      "order": 4,
+      "title": "Search & Geocoding",
+      "description": "These routes handle spatial search queries, leveraging the database to find locations and institutions across West Bengal.",
+      "nodeIds": [
+        "file:server/src/routes/search.js",
+        "file:server/src/routes/nearby.js"
+      ]
+    },
+    {
+      "order": 5,
+      "title": "Hospital & School Pipeline",
+      "description": "The data pipeline captures regional data (like WBBSE schools and AISHE colleges) and transforms it into the PostGIS schema for mapping.",
+      "nodeIds": []
+    },
+    {
+      "order": 6,
+      "title": "Institutions Schema",
+      "description": "This SQL schema defines the tables for educational and health institutions, ensuring high-fidelity spatial data storage.",
+      "nodeIds": []
+    },
+    {
+      "order": 7,
+      "title": "Map Frontend",
+      "description": "The frontend implementation uses a map-based UI to visualize spatial layers and interact with the backend API endpoints.",
+      "nodeIds": [
+        "file:frontend/index.html",
+        "file:frontend/js/app.js"
+      ]
+    },
+    {
+      "order": 8,
+      "title": "System Orchestration",
+      "description": "The start_all script automates the launch of all services, including the API, OSRM routing, and Nominatim geocoding.",
+      "nodeIds": [
+        "file:start_all.sh"
+      ]
+    }
+  ]
+}
