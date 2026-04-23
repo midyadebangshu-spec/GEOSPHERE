@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">GeoSphere WB+</string>
+    <string name="title_activity_main">GeoSphere WB+</string>
+    <string name="package_name">com.geosphere.wb.plus</string>
+    <string name="custom_url_scheme">com.geosphere.wb.plus</string>
+</resources>

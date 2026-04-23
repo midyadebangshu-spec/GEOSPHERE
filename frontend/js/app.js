@@ -9,7 +9,7 @@
 (() => {
     'use strict';
 
-    const API_BASE = window.location.origin;
+    const API_BASE = window.GEOSPHERE_API_BASE || window.location.origin;
 
     // ─── West Bengal Center & Bounds ────────────────────────────────────
     const WB_CENTER = [22.9868, 87.855];
@@ -33,6 +33,7 @@
     GeoRouting.init(map);
     GeoAnalytics.init(map);
     GeoWeather.init(map);
+    GeoRadar.init(map);
 
     // ─── Nearby Search State ────────────────────────────────────────────
     let nearbyMarkers = [];

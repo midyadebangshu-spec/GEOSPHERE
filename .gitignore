@@ -53,6 +53,40 @@ pm2.log
 *.swp
 *.swo
 
+# AI agent configs
+.claude/
+.cursor/
+.cursorrules
+.kiro/
+.mcp.json
+.opencode.json
+.windsurfrules
+.understand-anything/
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+
+# Large data files
+Data_Mandir.json
+*.tif
+
 # Cloudflare tunnel local config (keep template tracked)
 cloudflared/*.yml
 !cloudflared/config.example.yml
+# Added by code-review-graph
+.code-review-graph/
+
+# Auto-generated frontend config (written by start_tunnel_quick.sh)
+frontend/js/env.js
+
+# Admin CLI virtual environment
+admin/venv/
+
+# Capacitor / Android build artifacts
+mobile/android/.gradle/
+mobile/android/build/
+mobile/android/app/build/
+mobile/android/app/src/main/assets/public/
+mobile/android/app/src/main/assets/capacitor.config.json
+mobile/android/.idea/
+mobile/.idea/

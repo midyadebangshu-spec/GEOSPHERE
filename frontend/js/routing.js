@@ -6,7 +6,7 @@
  */
 
 const GeoRouting = (() => {
-    const API_BASE = window.location.origin;
+    const API_BASE = window.GEOSPHERE_API_BASE || window.location.origin;
     let map = null;
     let routeControl = null;
     let startPoint = null;

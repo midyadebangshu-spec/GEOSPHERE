@@ -19,6 +19,7 @@ const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 
 const { testConnection } = require('./db');
+const { initializeRadar } = require('./radar');
 
 // Route modules
 const nearbyRoutes = require('./routes/nearby');
@@ -35,6 +36,8 @@ const commonsRoutes = require('./routes/commons');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
+
+app.set('trust proxy', 1);
 
 // ─── Middleware ─────────────────────────────────────────────────────────────
 
@@ -119,7 +122,7 @@ async function start() {
     // Test DB connection
     await testConnection();
 
-    app.listen(PORT, () => {
+    const server = app.listen(PORT, () => {
         console.log('');
         console.log('╔═══════════════════════════════════════════════════╗');
         console.log('║       GeoSphere WB+ API Server                   ║');
@@ -130,6 +133,9 @@ async function start() {
         console.log('╚═══════════════════════════════════════════════════╝');
         console.log('');
     });
+
+    // Attach real-time radar websocket engine
+    initializeRadar(server);
 }
 
 start().catch(err => {

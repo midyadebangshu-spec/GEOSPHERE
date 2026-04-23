@@ -6,7 +6,7 @@
  */
 
 const GeoWeather = (() => {
-    const API_BASE = window.location.origin;
+    const API_BASE = window.GEOSPHERE_API_BASE || window.location.origin;
     let map = null;
     let activePopup = null;
     let commonsSwipeTimer = null;
@@ -49,9 +49,9 @@ const GeoWeather = (() => {
         });
 
         window.addEventListener('geosphere:place-selected', async (evt) => {
-            const { lat, lon, name } = evt.detail || {};
+            const { lat, lon, name, imageUrl, workers } = evt.detail || {};
             if (!isValidCoord(lat, lon)) return;
-            await showAt(lat, lon, name || 'Selected place');
+            await showAt(lat, lon, name || 'Selected place', imageUrl, workers);
         });
     }
 
@@ -70,7 +70,7 @@ const GeoWeather = (() => {
         return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
 
-    async function showAt(lat, lon, placeName = 'Selected place') {
+    async function showAt(lat, lon, placeName = 'Selected place', imageUrl, workersData) {
         if (!map) return;
         clearCommonsAutoSwipe();
 
@@ -93,8 +93,13 @@ const GeoWeather = (() => {
         const aqi = aqiResult.status === 'fulfilled' ? aqiResult.value : null;
         const population = populationResult.status === 'fulfilled' ? populationResult.value : null;
         const commonsImages = commonsResult.status === 'fulfilled' ? commonsResult.value : [];
+        
+        let workers = [];
+        try {
+            if (workersData) workers = JSON.parse(decodeURIComponent(workersData));
+        } catch(e) {}
 
-        activePopup.setContent(renderInsights(placeName, lat, lon, weather, aqi, population, commonsImages));
+        activePopup.setContent(renderInsights(placeName, lat, lon, weather, aqi, population, commonsImages, imageUrl, workers));
         startCommonsAutoSwipe();
     }
 
@@ -243,7 +248,16 @@ const GeoWeather = (() => {
         `;
     }
 
-    function renderInsights(placeName, lat, lon, weather, aqi, population, commonsImages) {
+    function renderInsights(placeName, lat, lon, weather, aqi, population, commonsImages, imageUrl, workers) {
+        if (imageUrl && !imageUrl.includes('no-mandir-image')) {
+            commonsImages.unshift({
+                title: placeName,
+                thumbnail: imageUrl,
+                pageUrl: imageUrl,
+                source: 'Mandir Data'
+            });
+        }
+
         const weatherHtml = weather
             ? renderWeatherPanel(weather, population)
             : '<div class="weather-status error">Weather unavailable</div>';
@@ -251,6 +265,26 @@ const GeoWeather = (() => {
             ? renderAqiPanel(aqi)
             : '<div class="weather-status error">AQI unavailable</div>';
         const commonsHtml = renderCommonsSection(commonsImages);
+        
+        // Build workers HTML if present
+        let workersHtml = '';
+        if (workers && workers.length > 0) {
+            let workersList = workers.map(w => `
+                <div class="insights-aqi-row" style="background:var(--bg-hover); padding:6px 10px; border-radius:var(--radius-sm); border:1px solid var(--border-color); margin-bottom:6px; display:block;">
+                    <div style="font-size:13px; font-weight:600; color:var(--text-primary);">${escapeHtml(String(w.f2 || 'Unknown'))}</div>
+                    ${w.f3 ? `<div style="font-size:11px; color:var(--accent-cyan); margin-top:2px;">📞 ${escapeHtml(String(w.f3))}</div>` : ''}
+                </div>
+            `).join('');
+            
+            workersHtml = `
+                <div class="insights-panels" style="margin-top:0; border-top:1px dashed var(--border-color); grid-template-columns: 1fr;">
+                    <div class="insights-panel">
+                        <div class="insights-panel-title">Worker Details</div>
+                        <div style="margin-top:8px;">${workersList}</div>
+                    </div>
+                </div>
+            `;
+        }
 
         return `
             <div class="insights-popup-card">
@@ -270,6 +304,7 @@ const GeoWeather = (() => {
                         ${aqiHtml}
                     </div>
                 </div>
+                ${workersHtml}
                 <div class="weather-coords">${lat.toFixed(5)}, ${lon.toFixed(5)}</div>
             </div>
         `;

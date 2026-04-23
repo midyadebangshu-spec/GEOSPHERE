@@ -135,6 +135,23 @@ else
     err "Docker not installed."
 fi
 
+# ─── 4.5 Redis ─────────────────────────────────────────────────────────────
+log "4.5/5 — Redis (Docker)"
+if [[ -n "${DOCKER_BIN}" ]]; then
+    if sudo "${DOCKER_BIN}" ps --format '{{.Names}}' | grep -q "geosphere-redis"; then
+        ok "Redis container is running."
+    else
+        echo "  ▶ Starting Redis container..."
+        sudo "${DOCKER_BIN}" run -d --name geosphere-redis -p 6379:6379 --restart unless-stopped redis:alpine 2>/dev/null || sudo "${DOCKER_BIN}" start geosphere-redis
+        sleep 2
+        ok "Redis started."
+    fi
+else
+    err "Docker not installed."
+fi
+
+
+
 # ─── 5. Express API (PM2) ──────────────────────────────────────────────────
 log "5/5 — Express API"
 

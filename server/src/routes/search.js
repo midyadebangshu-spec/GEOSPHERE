@@ -58,8 +58,24 @@ router.get('/', async (req, res, next) => {
             return [];
         });
 
+        // 3. Mandirs Promise (Satsang mandir locations)
+        const mandirPromise = dbQuery(
+            `SELECT sem_id, name, address, district, state, pincode, image_url, worker_details,
+                    ST_Y(geom) AS lat, ST_X(geom) AS lon
+             FROM mandirs
+             WHERE name ILIKE $1 OR address ILIKE $1
+                OR district ILIKE $1 OR state ILIKE $1
+             LIMIT $2`,
+            [`%${searchQuery}%`, maxResults]
+        ).then(result => result.rows).catch(err => {
+            console.error('Mandir Search Error:', err.message);
+            return [];
+        });
+
         // Execute queries in parallel utilizing full federated logic
-        const [nomData, pgData] = await Promise.all([nominatimPromise, postgisPromise]);
+        const [nomData, pgData, mandirData] = await Promise.all([
+            nominatimPromise, postgisPromise, mandirPromise
+        ]);
 
         // Transform PostGIS rows into Nominatim format arrays guaranteeing exact UI parsing 
         const pgResults = pgData.map(row => {
@@ -78,6 +94,26 @@ router.get('/', async (req, res, next) => {
             };
         });
 
+        // Transform Mandir rows into Nominatim format
+        const mandirResults = mandirData.map(row => {
+            const fullAddress = [row.address, row.district, row.state, row.pincode]
+                .filter(Boolean).join(', ');
+            return {
+                osm_id: row.sem_id,
+                osm_type: 'node',
+                display_name: `${row.name}${fullAddress ? ', ' + fullAddress : ''} [Mandir]`,
+                lat: row.lat !== null ? parseFloat(row.lat) : null,
+                lon: row.lon !== null ? parseFloat(row.lon) : null,
+                type: 'place_of_worship',
+                category: 'amenity',
+                importance: 0.98, // High priority, just below institutions
+                address: fullAddress ? { common: fullAddress } : {},
+                image_url: row.image_url || null,
+                worker_details: row.worker_details || null,
+                boundingbox: row.lat !== null ? [row.lat, row.lat, row.lon, row.lon].map(String) : null
+            };
+        }).filter(r => r.lat !== null && r.lon !== null);
+
         // Transform Nominatim elements ensuring consistent types
         const nomResults = nomData.map(item => ({
             osm_id: item.osm_id,
@@ -93,7 +129,7 @@ router.get('/', async (req, res, next) => {
         }));
 
         // Merge arrays and utilize algorithmic boosting prioritization based on our specific source logic
-        const combined = [...pgResults, ...nomResults];
+        const combined = [...pgResults, ...mandirResults, ...nomResults];
         combined.sort((a, b) => b.importance - a.importance);
 
         const finalResults = combined.slice(0, maxResults);

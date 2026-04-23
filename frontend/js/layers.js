@@ -5,7 +5,7 @@
  */
 
 const GeoLayers = (() => {
-    const API_BASE = window.location.origin;
+    const API_BASE = window.GEOSPHERE_API_BASE || window.location.origin;
     const GEOSERVER_WMS = `${API_BASE}/api/tiles/wms`;
 
     // ─── Base Map Tile Providers ────────────────────────────────────────

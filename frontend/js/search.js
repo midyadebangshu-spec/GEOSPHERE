@@ -6,7 +6,7 @@
  */
 
 const GeoSearch = (() => {
-    const API_BASE = window.location.origin;
+    const API_BASE = window.GEOSPHERE_API_BASE || window.location.origin;
     let map = null;
     let searchMarker = null;
     let debounceTimer = null;
@@ -86,7 +86,7 @@ const GeoSearch = (() => {
             }
 
             results.innerHTML = data.results.map((r, i) => `
-                <div class="search-result-item" data-idx="${i}" data-lat="${r.lat}" data-lon="${r.lon}" data-name="${r.display_name}">
+                <div class="search-result-item" data-idx="${i}" data-lat="${r.lat}" data-lon="${r.lon}" data-name="${r.display_name}" data-image="${r.image_url || ''}" data-workers="${encodeURIComponent(JSON.stringify(r.worker_details || []))}">
                     <div class="search-result-icon">${getIcon(r.type)}</div>
                     <div class="search-result-text">
                         <div class="search-result-name">${escapeHtml(r.display_name.split(',')[0])}</div>
@@ -101,7 +101,9 @@ const GeoSearch = (() => {
                     const lat = parseFloat(item.dataset.lat);
                     const lon = parseFloat(item.dataset.lon);
                     const name = item.dataset.name;
-                    flyTo(lat, lon, name);
+                    const imageUrl = item.dataset.image || '';
+                    const workersData = item.dataset.workers || '%5B%5D';
+                    flyTo(lat, lon, name, imageUrl, workersData);
                 });
             });
 
@@ -111,7 +113,7 @@ const GeoSearch = (() => {
         }
     }
 
-    function flyTo(lat, lon, name) {
+    function flyTo(lat, lon, name, imageUrl, workersData) {
         results.classList.add('hidden');
         input.value = name.split(',')[0];
         clearBtn.classList.remove('hidden');
@@ -122,14 +124,50 @@ const GeoSearch = (() => {
         // Fly to location
         map.flyTo([lat, lon], 16, { duration: 1.2 });
 
+        // Build popup content
+        let popupHtml = `<h3>${escapeHtml(name.split(',')[0])}</h3>`;
+
+        // Show mandir image if available and not the placeholder SVG
+        if (imageUrl && !imageUrl.includes('no-mandir-image')) {
+            popupHtml += `
+                <div class="popup-image-container">
+                    <img src="${imageUrl}" alt="${escapeHtml(name.split(',')[0])}"
+                         class="popup-image"
+                         onerror="this.parentElement.style.display='none'" />
+                </div>`;
+        }
+
+        popupHtml += `<div class="popup-detail">${escapeHtml(name)}</div>`;
+
+        // Add worker details if available
+        let workers = [];
+        try {
+            if (workersData) workers = JSON.parse(decodeURIComponent(workersData));
+        } catch(e) {}
+        
+        if (workers && workers.length > 0) {
+            popupHtml += `<div class="popup-workers-column"><strong style="display:block; margin-bottom:4px; margin-top:8px; font-size:13px; color:var(--text-secondary);">Worker Details</strong>`;
+            workers.forEach(w => {
+                const wName = w.f2 || 'Unknown';
+                const wPhone = w.f3 || '';
+                popupHtml += `
+                    <div class="popup-worker-item">
+                        <div class="worker-name">${escapeHtml(String(wName))}</div>
+                        ${wPhone ? `<div class="worker-phone">📞 ${escapeHtml(String(wPhone))}</div>` : ''}
+                    </div>
+                `;
+            });
+            popupHtml += `</div>`;
+        }
+
         // Add marker
         searchMarker = L.marker([lat, lon])
             .addTo(map)
-            .bindPopup(`<h3>${escapeHtml(name.split(',')[0])}</h3><div class="popup-detail">${escapeHtml(name)}</div>`)
+            .bindPopup(popupHtml, { maxWidth: 300, minWidth: 200 })
             .openPopup();
 
         window.dispatchEvent(new CustomEvent('geosphere:place-selected', {
-            detail: { lat, lon, name },
+            detail: { lat, lon, name, imageUrl, workers },
         }));
     }
 
