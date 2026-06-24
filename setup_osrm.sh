@@ -20,7 +20,7 @@ IFS=$'\n\t'
 
 # ─── Configuration ───────────────────────────────────────────────────────────
 readonly SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-readonly PBF_FILE="eastern-zone-latest.osm.pbf"
+readonly PBF_FILE="india-latest.osm.pbf"
 readonly OSRM_DATA_DIR="${SCRIPT_DIR}/osrm-data"
 OSRM_PORT_WAS_SET="${OSRM_PORT+x}"
 OSRM_PORT="${OSRM_PORT:-5000}"

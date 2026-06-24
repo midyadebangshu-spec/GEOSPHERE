@@ -51,7 +51,7 @@ def parse_args():
 
     parser.add_argument('--db-host', default='localhost')
     parser.add_argument('--db-port', type=int, default=5432)
-    parser.add_argument('--db-name', default='osm_wb')
+    parser.add_argument('--db-name', default='osm_india')
     parser.add_argument('--db-user', default='postgres')
     parser.add_argument('--db-password', default=None)
 

@@ -1,2 +1,11 @@
+# App-level build artifacts
 /build/*
 !/build/.npmkeep
+
+# Local app configuration
+local.properties
+
+# Generated app files
+src/main/assets/capacitor.config.json
+src/main/assets/capacitor.plugins.json
+src/main/assets/public/

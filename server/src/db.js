@@ -10,7 +10,7 @@ const { Pool } = require('pg');
 const poolConfig = {
     host:     process.env.DB_HOST     || 'localhost',
     port:     process.env.DB_PORT     || 5432,
-    database: process.env.DB_NAME     || 'osm_wb',
+    database: process.env.DB_NAME     || 'osm_india',
     user:     process.env.DB_USER     || 'postgres',
     max:      20,              // Max concurrent connections
     idleTimeoutMillis: 30000,  // Close idle clients after 30s

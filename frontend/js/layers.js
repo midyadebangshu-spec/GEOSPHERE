@@ -8,20 +8,32 @@ const GeoLayers = (() => {
     const API_BASE = window.GEOSPHERE_API_BASE || window.location.origin;
     const GEOSERVER_WMS = `${API_BASE}/api/tiles/wms`;
 
+    // ─── India Boundary Corrector Setup ───────────────────────────────
+    // Extends L.tileLayer with boundary-corrected tiles showing India's
+    // official borders (PoK, Aksai Chin within India) per Survey of India.
+    if (typeof IndiaBoundaryCorrector !== 'undefined') {
+        IndiaBoundaryCorrector.extendLeaflet(L);
+    }
+
+    // Use corrected tiles if available, otherwise fall back to standard tiles
+    const _tile = (typeof L.tileLayer.indiaBoundaryCorrected === 'function')
+        ? L.tileLayer.indiaBoundaryCorrected.bind(L.tileLayer)
+        : L.tileLayer.bind(L);
+
     // ─── Base Map Tile Providers ────────────────────────────────────────
     const baseMaps = {
-        osm: L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        osm: _tile('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             maxZoom: 19,
             maxNativeZoom: 19,
             subdomains: 'abcd',
         }),
-        satellite: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        satellite: _tile('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             attribution: '&copy; Esri',
             maxZoom: 19,
             maxNativeZoom: 18,
         }),
-        terrain: L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+        terrain: _tile('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://opentopomap.org">OpenTopoMap</a>',
             maxZoom: 19,
             maxNativeZoom: 17,

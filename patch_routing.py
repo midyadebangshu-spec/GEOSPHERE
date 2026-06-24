@@ -1,80 +1,16 @@
-/**
- * GeoSphere WB+ — Routing Module
- * 
- * Handles start/end point selection, route calculation via OSRM,
- * route display with Leaflet Routing Machine, and step-by-step directions.
- */
+import re
 
-const GeoRouting = (() => {
-    const API_BASE = window.GEOSPHERE_API_BASE || window.location.origin;
-    let map = null;
-    let routeControl = null;
-    let startPoint = null;
-    let endPoint = null;
-    let userDefaultStartPoint = null;
-    let hasCustomStartPoint = false;
-    let startMarker = null;
-    let endMarker = null;
-    let selectingPoint = null;   // 'start' or 'end'
-    let routesByProfile = {};
+with open("frontend/js/routing.js", "r") as f:
+    content = f.read()
 
-    const startInput = document.getElementById('route-start');
-    const endInput = document.getElementById('route-end');
-    const startSuggestions = document.getElementById('route-start-suggestions');
-    const endSuggestions = document.getElementById('route-end-suggestions');
-    const swapBtn = document.getElementById('route-swap');
-    const getRouteBtn = document.getElementById('btn-get-route');
-    const clearRouteBtn = document.getElementById('btn-clear-route');
-    const routeInfo = document.getElementById('route-info');
-    const routeSteps = document.getElementById('route-steps');
-
-    let startDebounceTimer = null;
-    let endDebounceTimer = null;
-
-    // Maneuver icons
-    const maneuverIcons = {
-        'turn': '↱', 'new name': '→', 'depart': '↑', 'arrive': '■',
-        'merge': '⤵', 'fork': '⑂', 'roundabout': '⟳',
-        'continue': '→', 'end of road': '⊥', 'use lane': '⇶',
-        'default': '➤',
-    };
-
-    function init(leafletMap) {
-        map = leafletMap;
-
-        startInput.value = '';
-        endInput.value = '';
-
-        // Click on input to enable map-click selection
-        startInput.addEventListener('focus', () => { selectingPoint = 'start'; showToast('Click on the map to set the start point', 'info'); });
-        endInput.addEventListener('focus', () => { selectingPoint = 'end'; showToast('Click on the map to set the end point', 'info'); });
-
-        // Add autocomplete listeners
-        startInput.addEventListener('input', onStartInput);
-        endInput.addEventListener('input', onEndInput);
-
-        // Close suggestions on outside click
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('#route-start') && !e.target.closest('#route-start-suggestions')) {
-                startSuggestions.classList.add('hidden');
-            }
-            if (!e.target.closest('#route-end') && !e.target.closest('#route-end-suggestions')) {
-                endSuggestions.classList.add('hidden');
-            }
+# 1. Add routePolylines and initialization
+init_target = """                if (routesByProfile[profile]) {
+                    displayRouteForProfile(profile);
+                }
+            });
         });
-
-        swapBtn.addEventListener('click', swapPoints);
-        getRouteBtn.addEventListener('click', getRoute);
-        clearRouteBtn.addEventListener('click', clearRoute);
-
-        // Profile buttons
-        document.querySelectorAll('.profile-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.profile-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                const profile = btn.dataset.profile;
-                if (routesByProfile[profile]) {
+    }"""
+init_replace = """                if (routesByProfile[profile]) {
                     displayRouteForProfile(profile);
                 }
             });
@@ -88,105 +24,13 @@ const GeoRouting = (() => {
     }
 
     let routePolylines = [];
+"""
+content = content.replace(init_target, init_replace)
 
-
-    /**
-     * Set a waypoint from a map click (called by app.js)
-     */
-    function setPointFromMap(latlng) {
-        if (!selectingPoint) return false;
-
-        if (selectingPoint === 'start') {
-            setStartPoint(latlng);
-        } else {
-            setEndPoint(latlng);
-        }
-
-        selectingPoint = null;
-        return true;
-    }
-
-    function setStartPoint(latlng, options = {}) {
-        const { isDefault = false } = options;
-        startPoint = latlng;
-        hasCustomStartPoint = !isDefault;
-        startInput.value = `${latlng.lat.toFixed(5)}, ${latlng.lng.toFixed(5)}`;
-
-        if (startMarker) map.removeLayer(startMarker);
-        startMarker = L.circleMarker([latlng.lat, latlng.lng], {
-            radius: 8, color: '#10b981', fillColor: '#10b981', fillOpacity: 0.9, weight: 2,
-        }).addTo(map).bindPopup('Start Point');
-
-        // Reverse geocode for label
-        reverseGeocode(latlng, (name) => {
-            startInput.value = isDefault ? `Your location · ${name}` : name;
-        });
-    }
-
-    function setDefaultStartFromUser(latlng, options = {}) {
-        const { applyToUi = true } = options;
-        if (!latlng) return;
-
-        userDefaultStartPoint = latlng;
-
-        if (!hasCustomStartPoint || !startPoint) {
-            startPoint = latlng;
-            if (applyToUi) {
-                setStartPoint(latlng, { isDefault: true });
-            }
-        }
-    }
-
-    function setEndPoint(latlng) {
-        endPoint = latlng;
-        endInput.value = `${latlng.lat.toFixed(5)}, ${latlng.lng.toFixed(5)}`;
-
-        if (endMarker) map.removeLayer(endMarker);
-        endMarker = L.circleMarker([latlng.lat, latlng.lng], {
-            radius: 8, color: '#f43f5e', fillColor: '#f43f5e', fillOpacity: 0.9, weight: 2,
-        }).addTo(map).bindPopup('End Point');
-
-        reverseGeocode(latlng, (name) => {
-            endInput.value = name;
-        });
-    }
-
-    async function reverseGeocode(latlng, callback) {
-        try {
-            const res = await fetch(`${API_BASE}/api/reverse?lat=${latlng.lat}&lon=${latlng.lng}`);
-            const data = await res.json();
-            if (data.display_name) callback(data.display_name.split(',').slice(0, 3).join(', '));
-        } catch (e) { /* keep coordinates */ }
-    }
-
-    function swapPoints() {
-        const tmpPoint = startPoint;
-        const tmpVal = startInput.value;
-
-        startPoint = endPoint;
-        startInput.value = endInput.value;
-
-        endPoint = tmpPoint;
-        endInput.value = tmpVal;
-        hasCustomStartPoint = !!startPoint;
-
-        // Swap markers
-        if (startMarker) { map.removeLayer(startMarker); }
-        if (endMarker) { map.removeLayer(endMarker); }
-
-        if (startPoint) {
-            startMarker = L.circleMarker([startPoint.lat, startPoint.lng], {
-                radius: 8, color: '#10b981', fillColor: '#10b981', fillOpacity: 0.9, weight: 2,
-            }).addTo(map);
-        }
-        if (endPoint) {
-            endMarker = L.circleMarker([endPoint.lat, endPoint.lng], {
-                radius: 8, color: '#f43f5e', fillColor: '#f43f5e', fillOpacity: 0.9, weight: 2,
-            }).addTo(map);
-        }
-    }
-
-    async function getRoute() {
+# 2. Replace getRoute
+getroute_match = re.search(r'async function getRoute\(\) \{.*?(?=function displayRouteForProfile)', content, re.DOTALL)
+if getroute_match:
+    getroute_new = """async function getRoute() {
         const typedDestination = endInput.value.trim();
 
         if (!startPoint) {
@@ -322,7 +166,13 @@ const GeoRouting = (() => {
         }
     }
 
-    function displayRouteForProfile(profile) {
+    """
+    content = content[:getroute_match.start()] + getroute_new + content[getroute_match.end():]
+
+# 3. Replace displayRouteForProfile
+display_match = re.search(r'function displayRouteForProfile\(profile\) \{.*?(?=function clearRoute\(\) \{)', content, re.DOTALL)
+if display_match:
+    display_new = """function displayRouteForProfile(profile) {
         const routeObj = routesByProfile[profile];
         if (!routeObj) return;
 
@@ -495,7 +345,25 @@ const GeoRouting = (() => {
         return coordinates;
     }
 
-    function clearRoute() {
+    """
+    content = content[:display_match.start()] + display_new + content[display_match.end():]
+
+# 4. Replace clearRoute
+clear_target = """    function clearRoute() {
+        if (routeControl) { map.removeLayer(routeControl); routeControl = null; }
+        if (startMarker) { map.removeLayer(startMarker); startMarker = null; }
+        if (endMarker) { map.removeLayer(endMarker); endMarker = null; }
+
+        startPoint = null;
+        endPoint = null;
+        routesByProfile = {};
+        endInput.value = '';
+        routeInfo.classList.add('hidden');
+        routeSteps.classList.add('hidden');
+        clearRouteBtn.classList.add('hidden');
+        routeInfo.innerHTML = '';
+        routeSteps.innerHTML = '';"""
+clear_replace = """    function clearRoute() {
         if (routeControl) { map.removeLayer(routeControl); routeControl = null; }
         if (routePolylines) { routePolylines.forEach(l => map.removeLayer(l)); routePolylines = []; }
         if (startMarker) { map.removeLayer(startMarker); startMarker = null; }
@@ -515,184 +383,9 @@ const GeoRouting = (() => {
         if(tableContainer) tableContainer.classList.add('hidden');
         
         routeInfo.innerHTML = '';
-        routeSteps.innerHTML = '';
+        routeSteps.innerHTML = '';"""
+content = content.replace(clear_target, clear_replace)
 
-        hasCustomStartPoint = false;
-        if (userDefaultStartPoint) {
-            setStartPoint(userDefaultStartPoint, { isDefault: true });
-        } else {
-            startInput.value = '';
-        }
-    }
+with open("frontend/js/routing.js", "w") as f:
+    f.write(content)
 
-    /**
-     * Programmatically set start or end (used by context menu).
-     */
-    function setFrom(latlng) {
-        setStartPoint(latlng);
-        // Switch to route panel
-        document.getElementById('tab-route').click();
-    }
-
-    function setTo(latlng) {
-        setEndPoint(latlng);
-        document.getElementById('tab-route').click();
-    }
-
-    function capitalize(s) {
-        return s.charAt(0).toUpperCase() + s.slice(1);
-    }
-
-    function formatDuration(durationSeconds, durationMinutesFallback) {
-        const fallbackMinutes = Number.parseFloat(durationMinutesFallback || 0);
-        const totalSeconds = Number.isFinite(durationSeconds)
-            ? Math.max(0, Math.round(durationSeconds))
-            : Math.max(0, Math.round(fallbackMinutes * 60));
-
-        const minute = 60;
-        const hour = 60 * minute;
-        const day = 24 * hour;
-        const week = 7 * day;
-
-        if (totalSeconds >= week) {
-            const weeks = Math.floor(totalSeconds / week);
-            const days = Math.floor((totalSeconds % week) / day);
-            const hours = Math.floor((totalSeconds % day) / hour);
-            const minutes = Math.floor((totalSeconds % hour) / minute);
-            return {
-                value: `${weeks}w ${days}d ${hours}h ${minutes}m`,
-                label: 'Duration',
-            };
-        }
-
-        if (totalSeconds >= day) {
-            const days = Math.floor(totalSeconds / day);
-            const hours = Math.floor((totalSeconds % day) / hour);
-            const minutes = Math.floor((totalSeconds % hour) / minute);
-            return {
-                value: `${days}d ${hours}h ${minutes}m`,
-                label: 'Duration',
-            };
-        }
-
-        if (totalSeconds >= hour) {
-            const hours = Math.floor(totalSeconds / hour);
-            const minutes = Math.floor((totalSeconds % hour) / minute);
-            return {
-                value: `${hours}h ${minutes}m`,
-                label: 'Duration',
-            };
-        }
-
-        return {
-            value: `${Math.floor(totalSeconds / minute)}m`,
-            label: 'Duration',
-        };
-    }
-
-    function isSelecting() {
-        return selectingPoint !== null;
-    }
-
-    function onStartInput() {
-        const query = startInput.value.trim();
-        clearTimeout(startDebounceTimer);
-
-        if (query.length < 2) {
-            startSuggestions.classList.add('hidden');
-            startSuggestions.innerHTML = '';
-            return;
-        }
-
-        startDebounceTimer = setTimeout(() => fetchLocationSuggestions(query, 'start'), 300);
-    }
-
-    function onEndInput() {
-        const query = endInput.value.trim();
-        clearTimeout(endDebounceTimer);
-
-        if (query.length < 2) {
-            endSuggestions.classList.add('hidden');
-            endSuggestions.innerHTML = '';
-            return;
-        }
-
-        endDebounceTimer = setTimeout(() => fetchLocationSuggestions(query, 'end'), 300);
-    }
-
-    async function fetchLocationSuggestions(query, type) {
-        try {
-            const res = await fetch(`${API_BASE}/api/search?q=${encodeURIComponent(query)}&limit=6`);
-            const data = await res.json();
-
-            const container = type === 'start' ? startSuggestions : endSuggestions;
-
-            if (!data.results || data.results.length === 0) {
-                container.innerHTML = '<div class="route-suggestion-item"><span style="color:var(--text-muted)">No results found</span></div>';
-                container.classList.remove('hidden');
-                return;
-            }
-
-            const typeIcons = {
-                city: 'CT', town: 'TN', village: 'VG', hamlet: 'HM',
-                residential: 'RS', administrative: 'AD',
-                hospital: 'H', school: 'S', university: 'U',
-                restaurant: 'R', cafe: 'C', bank: 'B',
-                park: 'PK', garden: 'GD', museum: 'M',
-                temple: 'T', mosque: 'MS', church: 'CH',
-                station: 'ST', bus_station: 'BS', airport: 'AP',
-                default: '•',
-            };
-
-            const getIcon = (placeType) => typeIcons[placeType] || typeIcons.default;
-
-            container.innerHTML = data.results.map((result, i) => `
-                <div class="route-suggestion-item" data-idx="${i}" data-lat="${result.lat}" data-lon="${result.lon}" data-name="${result.display_name}">
-                    <div class="route-suggestion-icon">${getIcon(result.type)}</div>
-                    <div class="route-suggestion-text">
-                        <div class="route-suggestion-name">${escapeHtml(result.display_name.split(',')[0])}</div>
-                        <div class="route-suggestion-address">${escapeHtml(result.display_name)}</div>
-                    </div>
-                </div>
-            `).join('');
-
-            // Click handlers
-            container.querySelectorAll('.route-suggestion-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    const lat = parseFloat(item.dataset.lat);
-                    const lon = parseFloat(item.dataset.lon);
-                    const name = item.dataset.name;
-                    selectLocationFromSuggestion(lat, lon, name, type);
-                });
-            });
-
-            container.classList.remove('hidden');
-        } catch (err) {
-            console.error('[Routing Suggestions]', err);
-        }
-    }
-
-    function selectLocationFromSuggestion(lat, lon, name, type) {
-        const latlng = { lat, lng: lon };
-
-        if (type === 'start') {
-            setStartPoint(latlng);
-            startInput.value = name.split(',')[0];
-            startSuggestions.classList.add('hidden');
-            startSuggestions.innerHTML = '';
-        } else {
-            setEndPoint(latlng);
-            endInput.value = name.split(',')[0];
-            endSuggestions.classList.add('hidden');
-            endSuggestions.innerHTML = '';
-        }
-    }
-
-    function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-
-    return { init, setPointFromMap, setFrom, setTo, clearRoute, isSelecting, setDefaultStartFromUser };
-})();

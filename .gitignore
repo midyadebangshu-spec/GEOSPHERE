@@ -2,6 +2,8 @@
 node_modules/
 npm-debug.log
 yarn-error.log
+package-lock.json
+yarn.lock
 
 # Environment variables
 .env
@@ -9,21 +11,32 @@ yarn-error.log
 .env.development.local
 .env.test.local
 .env.production.local
+.env.pgtileserv
 server/.env
+admin/.env
 
 # Data and database files
 *.pbf
 *.osm
+*.qgz
+*.sql.bak
+*.sql.backup
 nominatim-data/
 nominatim-postgres/
 osrm-data/
+otp-data/
+init-scripts/
 
 # Python / ETL artifacts
 .venv/
 venv/
 __pycache__/
 *.py[cod]
+*.pyo
 *.egg-info/
+dist/
+build/
+*.egg
 data_pipeline/downloads/
 data_pipeline/downloads_test/
 
@@ -46,12 +59,15 @@ Thumbs.db
 dump.pm2
 pm2.pid
 pm2.log
+ecosystem-local.config.js
 
 # IDE / Editor
 .idea/
 .vscode/
 *.swp
 *.swo
+.sublime-project
+.sublime-workspace
 
 # AI agent configs
 .claude/
@@ -60,6 +76,7 @@ pm2.log
 .kiro/
 .mcp.json
 .opencode.json
+.windsurf/
 .windsurfrules
 .understand-anything/
 AGENTS.md
@@ -69,11 +86,14 @@ GEMINI.md
 # Large data files
 Data_Mandir.json
 *.tif
+*.tiff
+*.zip
 
 # Cloudflare tunnel local config (keep template tracked)
 cloudflared/*.yml
 !cloudflared/config.example.yml
-# Added by code-review-graph
+
+# Code review graph
 .code-review-graph/
 
 # Auto-generated frontend config (written by start_tunnel_quick.sh)
@@ -90,3 +110,10 @@ mobile/android/app/src/main/assets/public/
 mobile/android/app/src/main/assets/capacitor.config.json
 mobile/android/.idea/
 mobile/.idea/
+mobile/node_modules/
+
+# Misc
+.DS_Store
+*.pem
+*.key
+.cache/

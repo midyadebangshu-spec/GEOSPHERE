@@ -20,9 +20,9 @@ fi
 PYTHON_BIN="${PYTHON_BIN:-python3}"
 DB_HOST="${DB_HOST:-localhost}"
 DB_PORT="${DB_PORT:-5432}"
-DB_NAME="${DB_NAME:-osm_wb}"
+DB_NAME="${DB_NAME:-osm_india}"
 DB_USER="${DB_USER:-postgres}"
-DB_PASSWORD="${DB_PASSWORD:-}"
+DB_PASSWORD="${DB_PASSWORD:-100599}"
 if [[ -z "$DB_PASSWORD" && -n "${PGPASSWORD:-}" ]]; then
   DB_PASSWORD="$PGPASSWORD"
 fi

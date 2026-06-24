@@ -21,10 +21,12 @@ module.exports = {
             env: {
                 NODE_ENV: 'production',
                 PORT: 4000,
+                DB_PASSWORD: '100599',
             },
             env_development: {
                 NODE_ENV: 'development',
                 PORT: 4000,
+                DB_PASSWORD: '100599',
             },
             error_file: './logs/api-error.log',
             out_file: './logs/api-out.log',

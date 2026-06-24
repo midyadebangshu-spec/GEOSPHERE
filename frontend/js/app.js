@@ -11,19 +11,19 @@
 
     const API_BASE = window.GEOSPHERE_API_BASE || window.location.origin;
 
-    // ─── West Bengal Center & Bounds ────────────────────────────────────
-    const WB_CENTER = [22.9868, 87.855];
-    const WB_ZOOM = 8;
-    const WB_BOUNDS = L.latLngBounds([21.5, 85.5], [27.2, 89.9]);
+    // ─── India Center & Bounds ──────────────────────────────────────
+    const INDIA_CENTER = [20.5937, 78.9629];
+    const INDIA_ZOOM = 5;
+    const INDIA_BOUNDS = L.latLngBounds([6.7, 68.1], [37.1, 97.4]);
 
     // ─── Map Initialization ─────────────────────────────────────────────
     const map = L.map('map', {
-        center: WB_CENTER,
-        zoom: WB_ZOOM,
+        center: INDIA_CENTER,
+        zoom: INDIA_ZOOM,
         zoomControl: true,
         preferCanvas: true,
-        maxBounds: WB_BOUNDS.pad(0.3),
-        minZoom: 6,
+        maxBounds: INDIA_BOUNDS.pad(0.3),
+        minZoom: 4,
         maxZoom: 19,
     });
 
