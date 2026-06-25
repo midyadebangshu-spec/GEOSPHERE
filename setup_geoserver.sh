@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 ###############################################################################
-# GeoSphere WB+ — GeoServer Setup Script
+# GeoSphere India — GeoServer Setup Script
 # ----------------------------------------
 # Installs GeoServer (standalone binary with embedded Jetty), configures it
-# as a systemd service, and publishes the PostGIS osm_wb layers via the
+# as a systemd service, and publishes the PostGIS osm_india layers via the
 # REST API.
 #
 # Prerequisites:
-#   • PostgreSQL running with osm_wb database populated (run setup_data_pipeline.sh first)
+#   • PostgreSQL running with osm_india database populated (run setup_data_pipeline.sh first)
 #   • sudo privileges
 #
 # Usage:

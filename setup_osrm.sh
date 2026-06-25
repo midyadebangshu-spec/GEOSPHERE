@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ###############################################################################
-# GeoSphere WB+ — OSRM Setup Script (Docker)
+# GeoSphere India — OSRM Setup Script (Docker)
 # --------------------------------------------
 # Sets up the OSRM routing engine using Docker:
 #   1. Installs Docker if not present

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ###############################################################################
-# GeoSphere WB+ — Nominatim Setup Script (Docker)
+# GeoSphere India — Nominatim Setup Script (Docker)
 # -------------------------------------------------
 # Sets up Nominatim geocoding engine using the official Docker image:
 #   1. Checks for Docker
@@ -9,7 +9,7 @@
 #
 # Prerequisites:
 #   • Docker installed
-#   • west-bengal-latest.osm.pbf in the project directory
+#   • india-latest.osm.pbf in the project directory
 #
 # Usage:
 #   chmod +x setup_nominatim.sh
@@ -21,7 +21,7 @@ IFS=$'\n\t'
 
 # ─── Configuration ───────────────────────────────────────────────────────────
 readonly SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-readonly PBF_FILE="eastern-zone-latest.osm.pbf"
+readonly PBF_FILE="india-latest.osm.pbf"
 NOM_PORT_WAS_SET="${NOM_PORT+x}"
 NOM_PORT="${NOM_PORT:-8088}"
 NOM_PASSWORD_WAS_SET="${NOMINATIM_PASSWORD+x}"
@@ -230,7 +230,7 @@ fi
 
 echo ""
 echo "  ⏳ Nominatim will import the PBF data on first start."
-echo "     This can take 15-45 minutes for Eastern Zone data."
+echo "     This can take a significant amount of time for India data."
 echo "     Monitor progress with: ${DOCKER_BIN} logs -f ${NOM_CONTAINER}"
 echo ""
 
@@ -247,7 +247,7 @@ if [[ "${REUSE_CONTAINER}" -eq 0 ]]; then
         --restart unless-stopped \
         -p "${NOM_PORT}:8080" \
         -e PBF_PATH="/nominatim/data/${PBF_FILE}" \
-        -e REPLICATION_URL="https://download.geofabrik.de/asia/india/eastern-zone-updates/" \
+        -e REPLICATION_URL="https://download.geofabrik.de/asia/india-updates/" \
         -e NOMINATIM_PASSWORD="${NOMINATIM_PASSWORD}" \
         -e IMPORT_STYLE="full" \
         -e THREADS="$(nproc)" \

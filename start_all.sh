@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ###############################################################################
-# GeoSphere WB+ — Master Startup Script
+# GeoSphere India — Master Startup Script
 # ----------------------------------------
 # Starts all services in the correct order:
 #   1. PostgreSQL
@@ -48,7 +48,7 @@ container_host_port() {
 
 echo ""
 echo "╔═══════════════════════════════════════════════════════════╗"
-echo "║           GeoSphere WB+ — Starting All Services          ║"
+echo "║           GeoSphere India — Starting All Services          ║"
 echo "╚═══════════════════════════════════════════════════════════╝"
 
 if command -v /snap/bin/docker &>/dev/null; then
@@ -236,5 +236,5 @@ echo "║  🔍 Nominatim     : http://localhost:${NOMINATIM_PORT}              
 echo "║  🌐 API + Frontend: http://localhost:4000                ║"
 echo "╚═══════════════════════════════════════════════════════════╝"
 echo ""
-echo "  Open http://localhost:4000 in your browser to use GeoSphere WB+"
+echo "  Open http://localhost:4000 in your browser to use GeoSphere India"
 echo ""

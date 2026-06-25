@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 ###############################################################################
-# GeoSphere WB+ (Advanced Edition) — Data Pipeline Setup
+# GeoSphere India — Data Pipeline Setup
 # -------------------------------------------------------
 # Automates:
 #   1. Dependency verification & installation (curl, postgresql, postgis, osm2pgsql)
 #   2. Ensure PostgreSQL service is running
-#   3. OSM PBF download for West Bengal (skip if already present)
+#   3. OSM PBF download for India (skip if already present)
 #   4. PostGIS database creation (idempotent)
 #   5. Data import via osm2pgsql
 #
@@ -23,16 +23,15 @@ set -euo pipefail   # Exit on error (-e), unset var (-u), pipe fail (-o pipefail
 IFS=$'\n\t'
 
 # ─── Configuration ───────────────────────────────────────────────────────────
-# NOTE: Geofabrik no longer provides individual state-level extracts for India.
-# West Bengal is included in the Eastern Zone (also covers Bihar, Jharkhand, Odisha).
-readonly OSM_URL="https://download.geofabrik.de/asia/india/eastern-zone-latest.osm.pbf"
-readonly PBF_FILE="eastern-zone-latest.osm.pbf"
-readonly DB_NAME="osm_wb"
+# Full India extract from Geofabrik (~1.5 GB)
+readonly OSM_URL="https://download.geofabrik.de/asia/india-latest.osm.pbf"
+readonly PBF_FILE="india-latest.osm.pbf"
+readonly DB_NAME="osm_india"
 readonly DB_USER="postgres"               # PostgreSQL superuser used for DB setup
 readonly WORK_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # osm2pgsql tuning — adjust to match your hardware (see PRD §5)
-readonly OSM2PGSQL_CACHE="2048"           # MB of RAM for node cache (raise on 32 GB boxes)
+readonly OSM2PGSQL_CACHE="16384"          # MB of RAM for node cache (16 GB)
 readonly OSM2PGSQL_PROCS="$(nproc 2>/dev/null || echo 2)"  # Use all CPUs; fallback to 2
 
 # ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -69,7 +68,7 @@ cleanup() {
 trap cleanup EXIT
 
 # ─── Step 0: Pre-flight Checks ──────────────────────────────────────────────
-log "Starting GeoSphere WB+ Data Pipeline Setup"
+log "Starting GeoSphere India Data Pipeline Setup"
 log "Working directory: ${WORK_DIR}"
 
 if [[ $EUID -eq 0 ]]; then
@@ -160,14 +159,14 @@ if ! sudo -u "${DB_USER}" psql -c "SELECT 1;" &>/dev/null; then
 fi
 
 # ─── Step 3: Download OSM PBF Data ──────────────────────────────────────────
-log "Step 3/5 — Downloading Eastern Zone OSM data (includes West Bengal)..."
+log "Step 3/5 — Downloading India OSM data..."
 
 if [[ -f "${WORK_DIR}/${PBF_FILE}" ]]; then
     echo "  ✓ File '${PBF_FILE}' already exists ($(du -h "${WORK_DIR}/${PBF_FILE}" | cut -f1))."
     echo "    Skipping download. Delete the file to force a re-download."
 else
     echo "  ↓ Downloading from: ${OSM_URL}"
-    echo "    File is ~230 MB — this may take a few minutes."
+    echo "    File is ~1.5 GB — this may take several minutes."
     # Using curl -L to follow Geofabrik's 302 redirects; -C - resumes partial downloads
     curl -L -C - --progress-bar --retry 3 --retry-delay 5 \
          --connect-timeout 60 \
@@ -231,7 +230,7 @@ echo "  Cache     : ${OSM2PGSQL_CACHE} MB"
 echo "  Processes : ${OSM2PGSQL_PROCS}"
 echo "  PBF File  : ${PBF_FILE}"
 echo ""
-echo "  This may take 10-30 minutes depending on hardware (see PRD §13)."
+echo "  This may take 1-3 hours for the full India dataset depending on hardware."
 echo ""
 
 # Run osm2pgsql as the current OS user so it can read the PBF file from
@@ -323,7 +322,7 @@ fi
 
 echo ""
 log "═══════════════════════════════════════════════════════════════"
-log "  GeoSphere WB+ Data Pipeline — Setup Complete!"
+log "  GeoSphere India Data Pipeline — Setup Complete!"
 log "═══════════════════════════════════════════════════════════════"
 echo ""
 echo "  Database : ${DB_NAME}"

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ###############################################################################
-# GeoSphere WB+ — OpenTripPlanner Setup Script (Docker)
+# GeoSphere India — OpenTripPlanner Setup Script (Docker)
 # --------------------------------------------
 # Sets up the OpenTripPlanner (OTP) routing engine using Docker:
 #   1. Prepares OTP data directory with OSM and GTFS files.

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 ###############################################################################
-# GeoSphere WB+ — pg_tileserv Launcher
+# GeoSphere India — pg_tileserv Launcher
 # -------------------------------------------------------
-# Starts pg_tileserv connected to the existing osm_wb PostGIS database
+# Starts pg_tileserv connected to the existing osm_india PostGIS database
 #
 # Usage:
 #   chmod +x pgtileserve.sh
@@ -10,7 +10,7 @@
 #
 # The script will:
 #   1. Check if PostgreSQL is running
-#   2. Verify osm_wb database exists and has PostGIS
+#   2. Verify osm_india database exists and has PostGIS
 #   3. Start/stop pg_tileserv Docker container
 #   4. Provide useful status information
 ###############################################################################

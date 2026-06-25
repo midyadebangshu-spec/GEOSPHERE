@@ -1,4 +1,4 @@
-# GeoSphere WB+
+# GeoSphere India
 
 Self-hosted geospatial web app for West Bengal using PostGIS, GeoServer, OSRM, Nominatim, and a Node.js API/frontend.
 
@@ -44,7 +44,7 @@ chmod +x setup_data_pipeline.sh
 ./setup_data_pipeline.sh
 ```
 
-This downloads `eastern-zone-latest.osm.pbf` (includes West Bengal) and imports into database `osm_wb`.
+This downloads `india-latest.osm.pbf` (includes all of India) and imports into database `osm_india`.
 
 ### Step B — Install/configure GeoServer and publish layers
 
@@ -143,7 +143,7 @@ This repo now includes a dedicated institutions data model and API for schools, 
 ### 1) Create the institutions table
 
 ```bash
-psql -h localhost -U postgres -d osm_wb -f server/sql/institutions_schema.sql
+psql -h localhost -U postgres -d osm_india -f server/sql/institutions_schema.sql
 ```
 
 ### 2) Ingest WBBSE schools (+ optional OSM export)
@@ -156,7 +156,7 @@ pip install -r data_pipeline/requirements.txt
 chmod +x data_pipeline/run_school_pipeline.sh
 
 WBBSE_CSV="/absolute/path/to/wbbse_schools.csv" \
-DB_HOST=localhost DB_PORT=5432 DB_NAME=osm_wb DB_USER=postgres DB_PASSWORD=... \
+DB_HOST=localhost DB_PORT=5432 DB_NAME=osm_india DB_USER=postgres DB_PASSWORD=... \
 ./data_pipeline/run_school_pipeline.sh
 ```
 
