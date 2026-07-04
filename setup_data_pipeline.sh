@@ -161,6 +161,7 @@ fi
 # ─── Step 3: Download OSM PBF Data ──────────────────────────────────────────
 log "Step 3/5 — Downloading India OSM data..."
 
+DOWNLOADED_NOW=0
 if [[ -f "${WORK_DIR}/${PBF_FILE}" ]]; then
     echo "  ✓ File '${PBF_FILE}' already exists ($(du -h "${WORK_DIR}/${PBF_FILE}" | cut -f1))."
     echo "    Skipping download. Delete the file to force a re-download."
@@ -173,6 +174,7 @@ else
          -o "${WORK_DIR}/${PBF_FILE}" \
          "${OSM_URL}"
     log "Download complete ($(du -h "${WORK_DIR}/${PBF_FILE}" | cut -f1))."
+    DOWNLOADED_NOW=1
 fi
 
 # Sanity check: file should be at least 1 MB
@@ -184,22 +186,26 @@ if [[ "${FILE_SIZE}" -lt 1048576 ]]; then
 fi
 
 # MD5 checksum verification (Geofabrik provides .md5 files alongside PBFs)
-MD5_URL="${OSM_URL}.md5"
-echo "  ↓ Downloading MD5 checksum..."
-if curl -sSfL -o "${WORK_DIR}/${PBF_FILE}.md5" "${MD5_URL}" 2>/dev/null; then
-    echo "  ✓ MD5 file downloaded. Verifying integrity..."
-    # Geofabrik md5 files contain just the hash + filename — adjust path for local check
-    EXPECTED_MD5=$(awk '{print $1}' "${WORK_DIR}/${PBF_FILE}.md5")
-    ACTUAL_MD5=$(md5sum "${WORK_DIR}/${PBF_FILE}" | awk '{print $1}')
-    if [[ "${EXPECTED_MD5}" == "${ACTUAL_MD5}" ]]; then
-        echo "  ✓ MD5 checksum verified: ${ACTUAL_MD5}"
+if [[ "${DOWNLOADED_NOW}" -eq 1 ]]; then
+    MD5_URL="${OSM_URL}.md5"
+    echo "  ↓ Downloading MD5 checksum..."
+    if curl -sSfL -o "${WORK_DIR}/${PBF_FILE}.md5" "${MD5_URL}" 2>/dev/null; then
+        echo "  ✓ MD5 file downloaded. Verifying integrity..."
+        # Geofabrik md5 files contain just the hash + filename — adjust path for local check
+        EXPECTED_MD5=$(awk '{print $1}' "${WORK_DIR}/${PBF_FILE}.md5")
+        ACTUAL_MD5=$(md5sum "${WORK_DIR}/${PBF_FILE}" | awk '{print $1}')
+        if [[ "${EXPECTED_MD5}" == "${ACTUAL_MD5}" ]]; then
+            echo "  ✓ MD5 checksum verified: ${ACTUAL_MD5}"
+        else
+            err "MD5 mismatch! Expected: ${EXPECTED_MD5}, Got: ${ACTUAL_MD5}"
+            err "The PBF file may be corrupt. Delete '${PBF_FILE}' and re-run."
+            exit 1
+        fi
     else
-        err "MD5 mismatch! Expected: ${EXPECTED_MD5}, Got: ${ACTUAL_MD5}"
-        err "The PBF file may be corrupt. Delete '${PBF_FILE}' and re-run."
-        exit 1
+        warn "Could not download MD5 checksum from Geofabrik. Skipping integrity check."
     fi
 else
-    warn "Could not download MD5 checksum from Geofabrik. Skipping integrity check."
+    echo "  ✓ Skipping MD5 check since the local file was reused."
 fi
 
 # ─── Step 4: Database Initialization (Idempotent) ───────────────────────────
