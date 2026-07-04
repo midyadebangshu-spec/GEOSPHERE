@@ -48,7 +48,7 @@ const GeoLayers = (() => {
      */
     function createWMSLayer(layerName) {
         return L.tileLayer.wms(GEOSERVER_WMS, {
-            layers: `geosphere_wb:${layerName}`,
+            layers: `geosphere_in:${layerName}`,
             format: 'image/png',
             transparent: true,
             version: '1.1.1',

@@ -12,7 +12,7 @@ const express = require('express');
 const router  = express.Router();
 
 const GEOSERVER_URL = process.env.GEOSERVER_URL || 'http://localhost:8080/geoserver';
-const WORKSPACE     = process.env.GEOSERVER_WORKSPACE || 'geosphere_wb';
+const WORKSPACE     = process.env.GEOSERVER_WORKSPACE || 'geosphere_in';
 
 /**
  * GET /api/tiles/wms — Proxy WMS requests to GeoServer

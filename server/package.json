@@ -1,5 +1,5 @@
 {
-  "name": "geosphere-wb-api",
+  "name": "geosphere-in-api",
   "version": "1.0.0",
   "description": "GeoSphere WB+ Backend API — Spatial queries, routing proxy, and geocoding for West Bengal",
   "main": "src/index.js",
