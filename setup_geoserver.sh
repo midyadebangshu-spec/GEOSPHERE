@@ -239,18 +239,33 @@ if [[ -d "${GEOSERVER_HOME}/bin" ]]; then
 else
     ZIPFILE="${SCRIPT_DIR}/geoserver-${GEOSERVER_VERSION}-bin.zip"
 
-    if [[ ! -f "${ZIPFILE}" ]]; then
-        echo "  ↓ Downloading GeoServer ${GEOSERVER_VERSION}..."
-        # SourceForge /download URLs return 302 redirects; curl -L follows them
-        curl -L --progress-bar --retry 3 --retry-delay 5 \
+    # Loop to download and automatically resume if it fails
+    MAX_RETRIES=10
+    ATTEMPT=0
+    while [[ ${ATTEMPT} -lt ${MAX_RETRIES} ]]; do
+        if [[ -f "${ZIPFILE}" ]] && unzip -t "${ZIPFILE}" &>/dev/null; then
+            echo "  ✓ Valid GeoServer ZIP already downloaded."
+            break
+        fi
+
+        echo "  ↓ Downloading (or resuming) GeoServer ${GEOSERVER_VERSION} (Attempt $((ATTEMPT+1))/${MAX_RETRIES})..."
+        curl -L -C - --progress-bar --retry 3 --retry-delay 5 \
              --connect-timeout 60 \
              -o "${ZIPFILE}" \
-             "${GEOSERVER_URL}"
-    fi
+             "${GEOSERVER_URL}" || true
 
-    # Verify the zip is not empty / corrupt
+        if unzip -t "${ZIPFILE}" &>/dev/null; then
+            break
+        else
+            warn "Download interrupted or incomplete. Retrying..."
+            ATTEMPT=$((ATTEMPT+1))
+            sleep 2
+        fi
+    done
+
+    # Verify the zip one last time
     if ! unzip -t "${ZIPFILE}" &>/dev/null; then
-        err "Downloaded ZIP is corrupt. Delete '${ZIPFILE}' and re-run."
+        err "Failed to download a complete and valid ZIP after ${MAX_RETRIES} attempts. Delete '${ZIPFILE}' and try again later."
         exit 1
     fi
 
