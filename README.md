@@ -37,6 +37,8 @@ cd GEOSPHERE
 
 ## 2) Run one-time setup (in order)
 
+These scripts are designed to automatically provision secure passwords for you. However, you can explicitly control passwords using environment variables.
+
 ### Step A — Download OSM and import PostGIS
 
 ```bash
@@ -44,34 +46,43 @@ chmod +x setup_data_pipeline.sh
 ./setup_data_pipeline.sh
 ```
 
-This downloads `india-latest.osm.pbf` (includes all of India) and imports into database `osm_india`.
+This downloads `india-latest.osm.pbf` (includes all of India) and imports it into the `osm_india` database. It connects via local Linux sockets (`sudo -u postgres`), so **no passwords are needed** to run this script.
 
-### Step B — Install/configure GeoServer and publish layers
-
-```bash
-chmod +x setup_geoserver.sh
-./setup_geoserver.sh
-```
-
-Optional env overrides (example):
-
-```bash
-GEOSERVER_USER=admin GEOSERVER_PASS=geoserver ./setup_geoserver.sh
-```
-
-### Step C — Build/start OSRM
+### Step B — Build/start OSRM (Routing Engine)
 
 ```bash
 chmod +x setup_osrm.sh
 ./setup_osrm.sh
 ```
 
-### Step D — Import/start Nominatim
+This builds the routing graph and starts the Docker container. No database interactions occur here.
+
+### Step C — Import/start Nominatim (Search Engine)
 
 ```bash
 chmod +x setup_nominatim.sh
-./setup_nominatim.sh
+NOMINATIM_PASSWORD="your_custom_password" ./setup_nominatim.sh
 ```
+
+Nominatim runs in an isolated Docker container with its own internal database. If you do not provide `NOMINATIM_PASSWORD`, a random one will be generated for you.
+
+### Step D — Install GeoServer and publish layers
+
+GeoServer needs to connect to the main `osm_india` PostgreSQL database. You have two options:
+
+**Option 1: Auto-Provisioning (Recommended for fresh machines)**
+```bash
+chmod +x setup_geoserver.sh
+GEOSERVER_DB_PASS="geosphere99" ./setup_geoserver.sh
+```
+If you do NOT provide the main `DB_PASS`, the script will securely auto-provision a new, read-only PostgreSQL user (`geoserver_app`) just for GeoServer. You can provide `GEOSERVER_DB_PASS` to set this user's password, or leave it empty to generate a completely random password.
+
+**Option 2: Use your existing known password (If Postgres is already installed)**
+```bash
+chmod +x setup_geoserver.sh
+DB_PASS="your_known_postgres_password" ./setup_geoserver.sh
+```
+If you provide `DB_PASS`, the script skips auto-provisioning and connects GeoServer directly to the database using the master `postgres` user and your known password.
 
 ## 3) Start the full app
 
